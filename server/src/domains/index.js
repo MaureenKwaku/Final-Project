@@ -1,7 +1,9 @@
 const entity = require('./entity');
+const admin = require('./admin');
 
 const domains = {
-  entity
+  entity,
+  admin,
 };
 
 module.exports = domains;
