@@ -1,14 +1,12 @@
-const entity = require('./entity');
+const { admin } = require('../../domains');
 
 exports.resolvers = {
   Mutation: {
-    ...entity.resolvers.Mutation,
+    ...admin.resolver.Mutation,
   },
   Query: {
-    ...entity.resolvers.Query,
+    ...admin.resolver.Query,
   },
 };
 
-exports.typeDefs = [
-  entity.typeDefs,
-];
+exports.typeDefs = [admin.schema];
