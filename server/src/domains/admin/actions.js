@@ -27,7 +27,7 @@ async function exportAdmins({ input }) {
     });
     return __document;
   } catch (err) {
-    throw err;
+    return err;
   }
 }
 
@@ -46,7 +46,7 @@ async function getAdmins({ filter: { search, dateRange, order, orderBy, ...filte
     });
     return __admins;
   } catch (err) {
-    throw err;
+    return err;
   }
 }
 
@@ -61,7 +61,7 @@ async function getAdminsLength({ filter: { search, dateRange, order, orderBy, ..
     });
     return __adminsLength;
   } catch (err) {
-    throw err;
+    return err;
   }
 }
 
@@ -70,7 +70,7 @@ async function getAdmin({ filter: { adminId } }) {
     let __admin = await AdminModel.findById(adminId).populate('createdBy').execPopulate();
     return __admin;
   } catch (err) {
-    throw err;
+    return err;
   }
 }
 
@@ -89,13 +89,14 @@ async function createAdmin({ input }, adminId) {
         __admin.name = input.name;
         __admin.phone = manipulatePhone(input.phone);
         __admin.role = input.role;
+        await __admin.save();
+
         //send sms of new password
-        await wittySmsClient.sendSms(
+        wittySmsClient.sendSms(
           process.env.SMS_SENDERNAME,
           input.phone,
           `Welcome to the Car Rental Service. Your email is ${__admin.email} and your password is ${genPass}`,
         );
-        await __admin.save();
         return __admin;
       } else {
         return new Error('Admin already exists');
@@ -107,20 +108,21 @@ async function createAdmin({ input }, adminId) {
       password: genPass,
       createdBy: adminId,
     });
-    //send sms of new password
     try {
-      await wittySmsClient.sendSms(
-        process.env.SMS_SENDERNAME,
-        input.phone,
-        `Welcome to the Car Rental Service. Your email is ${__newAdmin.email} and your password is ${genPass}`,
-      );
       await __newAdmin.save();
     } catch (error) {
-      throw err;
+      return err;
     }
+
+    //send sms of new password
+    wittySmsClient.sendSms(
+      process.env.SMS_SENDERNAME,
+      input.phone,
+      `Welcome to the Car Rental Service. Your email is ${__newAdmin.email} and your password is ${genPass}`,
+    );
     return __newAdmin;
   } catch (err) {
-    throw err;
+    return err;
   }
 }
 
@@ -139,7 +141,7 @@ async function updateAdmin({ input: { adminId, block, role } }, loggedInAdmin) {
     }
     return await __admin.save();
   } catch (err) {
-    throw err;
+    return err;
   }
 }
 
@@ -150,7 +152,7 @@ async function deleteAdmin({ input: { adminId } }) {
     await AdminModel.findByIdAndUpdate(adminId, { isDeleted: true }, { new: true });
     return true;
   } catch (err) {
-    throw err;
+    return err;
   }
 }
 
@@ -166,7 +168,7 @@ async function loginAdmin({ input: { email, password } }) {
       token: await __admin.generateAuthToken(),
     };
   } catch (err) {
-    throw err;
+    return err;
   }
 }
 
@@ -180,7 +182,7 @@ async function updatePassword({ input: { oldPassword, newPassword } }, adminId) 
     await __admin.save();
     return true;
   } catch (error) {
-    throw error;
+    return error;
   }
 }
 
@@ -200,11 +202,11 @@ async function sendCode({ input: { email } }) {
         `Your reset password code is ${genCode}`,
       );
     } catch (error) {
-      throw error;
+      return error;
     }
     return __admin;
   } catch (error) {
-    throw error;
+    return error;
   }
 }
 
@@ -224,11 +226,11 @@ async function resendCode({ input: { adminId } }) {
         `Your reset password code is ${genCode}`,
       );
     } catch (error) {
-      throw error;
+      return error;
     }
     return __admin;
   } catch (error) {
-    throw error;
+    return error;
   }
 }
 
@@ -242,7 +244,7 @@ async function resetAdminPassword({ input: { adminId, code, password } }) {
     await __admin.save();
     return true;
   } catch (error) {
-    throw error;
+    return error;
   }
 }
 

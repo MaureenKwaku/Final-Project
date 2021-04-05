@@ -1,6 +1,6 @@
-# User Domain
+# Admin Domain
 
-Holds User:
+Holds Admin:
 
 - CRUD Services
 - Model Design
