@@ -8,6 +8,7 @@ module.exports = gql`
     phone: String!
     # isBlocked: Boolean!
     # blocked: BlockedType
+    createdBy: Admin!
     createdAt: Date!
     updatedAt: Date!
   }

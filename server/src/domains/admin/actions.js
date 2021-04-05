@@ -88,7 +88,6 @@ async function createAdmin({ input }, adminId) {
         __admin.password = genPass;
         __admin.name = input.name;
         __admin.phone = manipulatePhone(input.phone);
-        __admin.role = input.role;
         await __admin.save();
 
         //send sms of new password
@@ -130,7 +129,6 @@ async function updateAdmin({ input: { adminId, block, role } }, loggedInAdmin) {
   try {
     let __admin = await AdminModel.findById(adminId);
     if (!__admin) throw new Error('Admin not found');
-    __admin.role = role;
     if (block === true) {
       __admin.blocked = {
         by: loggedInAdmin,
