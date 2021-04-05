@@ -6,16 +6,16 @@ module.exports = gql`
     name: String!
     email: String!
     phone: String!
-    isBlocked: Boolean!
-    blocked: BlockedType
+    # isBlocked: Boolean!
+    # blocked: BlockedType
     createdAt: Date!
     updatedAt: Date!
   }
 
-  type BlockedType {
-    by: Admin
-    at: Date
-  }
+  # type BlockedType {
+  #   by: Admin
+  #   at: Date
+  # }
   input CreateAdminInput {
     name: String!
     email: String!
