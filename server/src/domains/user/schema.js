@@ -38,6 +38,16 @@ module.exports = gql`
     password: String!
   }
 
+  input GetUsersFilter {
+    name: String
+    email: String
+    phone: String
+    dateRange: DateRangeInput
+    search: String
+    orderBy: String
+    order: DocumentOrder
+  }
+
   extend type Query {
     user(filter: GetUserFilter = {}): User!
     users(filter: GetUsersFilter = {}, pagination: Pagination): [User]!

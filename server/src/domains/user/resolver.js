@@ -58,6 +58,7 @@ module.exports = {
         return err;
       }
     },
+
     deleteUser: async function (_, args, context, info) {
       try {
         const result = await deleteUser(args);
@@ -66,6 +67,7 @@ module.exports = {
         return err;
       }
     },
+
     loginUser: async function (_, args, context, info) {
       try {
         const result = await loginUser(args);

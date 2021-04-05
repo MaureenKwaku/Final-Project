@@ -2,12 +2,11 @@ const { tokenManager } = require('../helpers');
 
 async function resolveUser({ token }) {
   try {
-    const __user = await tokenManager.validateToken(token);
-    let user = {
-      _id: __user.id,
-      role: __user.role,
+    const __admin = await tokenManager.validateToken(token);
+    let admin = {
+      _id: __admin.id,
     };
-    return user;
+    return admin;
   } catch (e) {
     return new Error('AuthenticationError');
   }
