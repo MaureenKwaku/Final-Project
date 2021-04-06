@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const { tokenManager } = require('../../helpers');
 const _ = require('lodash');
+const tokenManager = require('../../helpers/token-manager');
 
 const manipulatePhone = (phone) => _.chain(phone).slice(-9).join('').padStart(12, '233').value();
 

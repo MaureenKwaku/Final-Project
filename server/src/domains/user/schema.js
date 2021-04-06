@@ -48,6 +48,10 @@ module.exports = gql`
     order: DocumentOrder
   }
 
+  input UpdateUserInput {
+    _id: ID!
+  }
+
   extend type Query {
     user(filter: GetUserFilter = {}): User!
     users(filter: GetUsersFilter = {}, pagination: Pagination): [User]!

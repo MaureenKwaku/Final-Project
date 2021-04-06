@@ -91,17 +91,21 @@ async function createAdmin({ input }, adminId) {
         await __admin.save();
 
         //send sms of new password
-        wittySmsClient.sendSms(
-          process.env.SMS_SENDERNAME,
-          input.phone,
-          `Welcome to the Car Rental Service. Your email is ${__admin.email} and your password is ${genPass}`,
-        );
+        try {
+          wittySmsClient.sendSms(
+            process.env.SMS_SENDERNAME,
+            input.phone,
+            `Welcome to Rent-A-Ride. Your email is ${__admin.email} and your password is ${genPass}`,
+          );
+        } catch (error) {
+          throw error;
+        }
         return __admin;
       } else {
         return new Error('Admin already exists');
       }
     }
-
+    console.log(genPass);
     let __newAdmin = new AdminModel({
       ...input,
       password: genPass,
@@ -114,11 +118,15 @@ async function createAdmin({ input }, adminId) {
     }
 
     //send sms of new password
-    wittySmsClient.sendSms(
-      process.env.SMS_SENDERNAME,
-      input.phone,
-      `Welcome to the Car Rental Service. Your email is ${__newAdmin.email} and your password is ${genPass}`,
-    );
+    try {
+      await wittySmsClient.sendSms(
+        process.env.SMS_SENDERNAME,
+        input.phone,
+        `Welcome to Rent-A-Ride. Your email is ${__newAdmin.email} and your password is ${genPass}`,
+      );
+    } catch (error) {
+      throw error;
+    }
     return __newAdmin;
   } catch (err) {
     return err;

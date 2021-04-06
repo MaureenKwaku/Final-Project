@@ -3,6 +3,7 @@ require('graphql-iso-date');
 const { ApolloServer, gql } = require('apollo-server-express');
 const graphqlInterface = require('./interfaces/graphql');
 const domains = require('./domains');
+const { resolveUser } = require('./middlewares');
 
 const rootTypeDef = gql`
   scalar Date
@@ -39,8 +40,16 @@ exports.GraphqlServer = () => {
     introspection: true,
     playground: true,
     tracing: true,
-    context: async () => {
-      return { domains };
+    context: async ({ req }) => {
+      let user = null;
+      if (req.headers.authorization)
+        user = await resolveUser({
+          token: req.headers.authorization,
+        });
+      return {
+        user,
+        domains,
+      };
     },
   });
 };
