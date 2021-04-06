@@ -59,14 +59,14 @@ module.exports = {
       }
     },
 
-    deleteUser: async function (_, args, context, info) {
+    deleteUser: authenticateAdmin(async function (_, args, context, info) {
       try {
         const result = await deleteUser(args);
         return result;
       } catch (err) {
         return err;
       }
-    },
+    }),
 
     loginUser: async function (_, args, context, info) {
       try {

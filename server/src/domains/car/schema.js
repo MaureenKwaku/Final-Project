@@ -12,7 +12,7 @@ module.exports = gql`
     plateNumber: String!
     images: [String]
     status: CarStatus!
-    createdBy: Admin!
+    createdBy: Admin
     createdAt: Date!
     updatedAt: Date!
   }
@@ -64,7 +64,7 @@ module.exports = gql`
   }
 
   extend type Query {
-    car(filter: GetCarFilter!}): Car!
+    car(filter: GetCarFilter!): Car!
     cars(filter: GetCarsFilter = {}, pagination: Pagination): [Car]!
     carsLength(filter: GetCarsFilter = {}): Int!
   }

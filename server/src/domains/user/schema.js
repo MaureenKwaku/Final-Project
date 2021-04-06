@@ -23,6 +23,7 @@ module.exports = gql`
     photo: String!
     address: String!
     phone: String!
+    password: String!
   }
 
   input GetUserFilter {
