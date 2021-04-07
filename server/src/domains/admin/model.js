@@ -5,7 +5,7 @@ const _ = require('lodash');
 
 const manipulatePhone = (phone) => _.chain(phone).slice(-9).join('').padStart(12, '233').value();
 
-const schema = mongoose.Schema(
+const schema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, trim: true, unique: true },

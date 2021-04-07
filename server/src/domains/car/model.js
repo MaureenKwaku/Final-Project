@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
-const schema = mongoose.Schema(
+const schema = new mongoose.Schema(
   {
     featured: { type: Boolean, required: true, default: false },
+    price: { type: Number, required: true },
     make: { type: String, required: true, trim: true },
     model: { type: String, required: true, trim: true },
     chassis: { type: String, trim: true },
