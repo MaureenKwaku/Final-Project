@@ -28,6 +28,7 @@ const schema = new mongoose.Schema(
       reason: { type: String, trim: true },
       at: { type: Date },
     },
+    paidAt: { type: Date },
     pickedUpAt: { type: Date },
     droppedOffAt: { type: Date },
   },
