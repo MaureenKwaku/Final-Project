@@ -12,6 +12,7 @@ module.exports = gql`
     payment: Payment
     cancellation: CancellationType
     amount: Float!
+    paidAt: Date
     pickedUpAt: Date
     droppedOffAt: Date
     createdAt: Date!
