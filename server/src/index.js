@@ -10,10 +10,12 @@ const { GraphqlServer } = require('./server');
 const app = express();
 
 app.use(cors());
-app.use(express.json());
+require('./interfaces/rest').startRest(app);
 
-(async function() {
-  await database.connectToMongoDB({ databaseURI: process.env.MONGO_DATABASE_URI || 'mongodb://localhost:27017/test' });
+(async function () {
+  await database.connectToMongoDB({
+    databaseURI: process.env.MONGO_DATABASE_URI || 'mongodb://localhost:27017/test',
+  });
   const graphqlServer = GraphqlServer();
   graphqlServer.applyMiddleware({ app, path: '/graphql' });
   app.listen(process.env.PORT || 5000, () => {
