@@ -1,3 +1,3 @@
 # Car Rental Server
 
-Backend Server Template
+Backend Server
