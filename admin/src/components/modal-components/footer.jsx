@@ -1,0 +1,73 @@
+import * as React from "react";
+
+const FooterHeader = ({
+  negativeLabel,
+  negativeAction,
+  approve,
+  showApprove,
+  deny,
+  showDeny,
+  revoke,
+  showRevoke,
+}) => {
+  return (
+    <React.Fragment>
+      <div
+        className={
+          "h-16 bg-gray-50 flex flex-row items-center justify-between px-4 border-t border-gray-100"
+        }
+      >
+        <button
+          onClick={negativeAction}
+          type="button"
+          className="relative inline-flex items-center px-4 py-3 rounded-none border border-red-200 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
+        >
+          <span className="sr-only">Previous</span>
+
+          <span>{negativeLabel}</span>
+        </button>
+        <div className={"flex flex-row items-center"}>
+          {showApprove && (
+            <button
+              onClick={approve}
+              type="submit"
+              className="-ml-px relative inline-flex items-center px-3 py-3 rounded-none  bg-primary-600 text-white text-sm font-medium hover:bg-primary-800 focus:z-10 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+            >
+              <span className="sr-only">Next</span>
+
+              <span>Approve Request</span>
+            </button>
+          )}
+          {showDeny && (
+            <button
+              onClick={deny}
+              type="submit"
+              className="ml-2 relative inline-flex items-center px-3 py-3 rounded-none border bg-white text-gray-500 hover:text-white text-sm font-medium hover:bg-primary-800 focus:z-10 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+            >
+              <span className="sr-only">Next</span>
+
+              <span>Reject Request</span>
+            </button>
+          )}
+          {showRevoke && (
+            <button
+              onClick={revoke}
+              type="submit"
+              className="-ml-px relative inline-flex items-center px-3 py-3 rounded-none  bg-primary-600 text-white text-sm font-medium hover:bg-primary-800 focus:z-10 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+            >
+              <span className="sr-only">Next</span>
+
+              <span>Revoke Approval</span>
+            </button>
+          )}
+        </div>
+      </div>
+    </React.Fragment>
+  );
+};
+
+FooterHeader.defaultProps = {
+  negativeLabel: "Cancel",
+};
+
+export default FooterHeader;

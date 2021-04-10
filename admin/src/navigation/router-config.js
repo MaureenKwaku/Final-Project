@@ -5,7 +5,7 @@ import { LOGIN, MAIN_LAYOUT, NOT_FOUND } from "./constants";
 import HandleNotFound from "./handle-not-found";
 
 const LoginPage = React.lazy(() => import("../pages/login"));
-// const Layout = React.lazy(() => import("../shared/layout"));
+const Layout = React.lazy(() => import("../shared/layout"));
 
 const RouterConfig = () => {
   return (
@@ -15,7 +15,7 @@ const RouterConfig = () => {
           <Switch>
             <Route exact={true} component={LoginPage} path={LOGIN} />
             {/* handle 404s */}
-            {/* <Route component={Layout} path={MAIN_LAYOUT} /> */}
+            <Route component={Layout} path={MAIN_LAYOUT} />
             <Route exact={true} component={HandleNotFound} path={NOT_FOUND} />
           </Switch>
         </React.Suspense>
