@@ -1,11 +1,12 @@
 import { lazy } from "react";
-import { OVERVIEW, ADMINS, USERS, CARS, SETTINGS } from "./constants";
+import { OVERVIEW, ADMINS, USERS, CARS, SETTINGS, RENTALS } from "./constants";
 
 const Overview = lazy(() => import("../pages/dashboard"));
 const Admins = lazy(() => import("../pages/admins"));
 const Users = lazy(() => import("../pages/users"));
 const Cars = lazy(() => import("../pages/cars"));
 const Settings = lazy(() => import("../pages/account-settings"));
+const Rentals = lazy(() => import("../pages/rentals"));
 
 const routes = [
   {
@@ -25,6 +26,12 @@ const routes = [
     exact: true,
     component: Cars,
     path: CARS,
+  },
+  {
+    name: "Manage Rentals",
+    exact: true,
+    component: Rentals,
+    path: RENTALS,
   },
   {
     name: "Manage Admins",
