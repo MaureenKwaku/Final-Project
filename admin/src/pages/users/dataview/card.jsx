@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { format } from "date-fns";
 import cn from "classnames";
+import ExternalLink from "../../../components/external-link";
 
 const AdminCard = ({ data, view }) => {
   return (
@@ -8,13 +9,22 @@ const AdminCard = ({ data, view }) => {
       <tr>
         <td className="px-6 py-4 max-w-0 w-full whitespace-nowrap text-sm font-medium text-gray-900">
           <div className="flex items-center space-x-3 lg:pl-2">
-            <div className={"bg-gray-800 rounded-full"}>
+            <ExternalLink
+              href={
+                data?.photo ||
+                "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=ah3lxr8uqw&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              }
+              className={"bg-gray-800 rounded-full"}
+            >
               <img
                 className="h-7 w-7 rounded-full"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=ah3lxr8uqw&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                src={
+                  data?.photo ||
+                  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=ah3lxr8uqw&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                }
                 alt=""
               />
-            </div>
+            </ExternalLink>
             <span>{data?.name || "N/A"}</span>
           </div>
         </td>

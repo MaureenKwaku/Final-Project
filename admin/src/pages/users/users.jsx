@@ -4,21 +4,8 @@ import { usePagination } from "../../components/hooks";
 import { DataLoader } from "../../components/loaders";
 import Dataview from "./dataview";
 import BreadCrumb from "../../components/breadcrumb";
-
-const data = {
-  users: [
-    {
-      name: "Domey Benjamin",
-      address: "Hello world",
-      email: "domeybenjamin1@gmail.com",
-      phone: "+233545526664",
-      createdAt: new Date(),
-    },
-  ],
-  usersLength: 1,
-};
-const loading = false;
-const refetch = () => {};
+import { useQuery } from "@apollo/client";
+import { GET_USERS } from "../../services/graphql/queries";
 
 const Users = () => {
   React.useEffect(() => {
@@ -26,6 +13,13 @@ const Users = () => {
   }, []);
 
   const { limit, setLimit, end, setEnd, skip, setSkip } = usePagination(12);
+
+  const { data, loading, refetch } = useQuery(GET_USERS, {
+    variables: {
+      skip,
+      limit,
+    },
+  });
 
   return (
     <React.Fragment>
