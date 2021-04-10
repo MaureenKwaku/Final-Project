@@ -29,3 +29,33 @@ export const ADD_ADMIN = gql`
     }
   }
 `;
+
+export const ADD_CAR = gql`
+  mutation CreateCar(
+    $featured: Boolean!
+    $make: String!
+    $model: String!
+    $chassis: String
+    $vin: String
+    $description: String
+    $plateNumber: String!
+    $images: [String]
+    $price: Float!
+  ) {
+    createCar(
+      input: {
+        featured: $featured
+        make: $make
+        model: $model
+        chassis: $chassis
+        vin: $vin
+        price: $price
+        description: $description
+        images: $images
+        plateNumber: $plateNumber
+      }
+    ) {
+      _id
+    }
+  }
+`;

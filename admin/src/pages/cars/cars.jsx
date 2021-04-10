@@ -6,6 +6,7 @@ import Dataview from "./dataview";
 import BreadCrumb from "../../components/breadcrumb";
 import { useQuery } from "@apollo/client";
 import { GET_CARS } from "../../services/graphql/queries";
+import AddCar from "./add";
 
 const Cars = () => {
   React.useEffect(() => {
@@ -13,6 +14,7 @@ const Cars = () => {
   }, []);
 
   const { limit, setLimit, end, setEnd, skip, setSkip } = usePagination(12);
+  const [add, setAdd] = React.useState(false);
 
   const { data, loading, refetch } = useQuery(GET_CARS, {
     variables: {
@@ -75,6 +77,40 @@ const Cars = () => {
             )}
           </>
         )}
+      </div>
+      <div className={"absolute bottom-10 right-10 border-none"}>
+        <FAB
+          onClick={() => {
+            setAdd(true);
+          }}
+        />
+      </div>
+      <AddCar show={add} setShow={setAdd} refetch={refetch} />
+    </React.Fragment>
+  );
+};
+
+const FAB = ({ onClick }) => {
+  return (
+    <React.Fragment>
+      <div
+        onClick={onClick}
+        className={"bg-yellow-700 p-3 rounded-full border-none cursor-pointer"}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+          />
+        </svg>
       </div>
     </React.Fragment>
   );

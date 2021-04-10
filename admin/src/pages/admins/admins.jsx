@@ -76,7 +76,7 @@ const Admins = () => {
           </>
         )}
       </div>
-      <div className={"absolute bottom-10 right-10"}>
+      <div className={"absolute bottom-10 right-10 border-none"}>
         <FAB
           onClick={() => {
             setAdd(true);

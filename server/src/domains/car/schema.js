@@ -8,6 +8,7 @@ module.exports = gql`
     model: String!
     chassis: String
     vin: String
+    price: Float!
     description: String
     plateNumber: String!
     images: [String]
@@ -35,6 +36,7 @@ module.exports = gql`
     make: String!
     model: String!
     chassis: String
+    price: Float!
     vin: String
     description: String
     plateNumber: String!
@@ -48,6 +50,7 @@ module.exports = gql`
     model: String
     chassis: String
     vin: String
+    price: Float
     description: String
     plateNumber: String
     images: [String]
