@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <Fragment>
       <Head>
-        <title>Rent-A-Ride Rental Service</title>
+        <title>Home | Rent-A-Ride Rental Service</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Fragment>
