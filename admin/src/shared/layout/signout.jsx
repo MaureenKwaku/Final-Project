@@ -1,11 +1,11 @@
 import * as React from "react";
 import { BasicModal } from "../../components/modals";
 import { ModalHeader, ModalFooter } from "../../components/modal-components";
-// import { useAuthProvider } from "../../services/context";
+import { useAuthProvider } from "../../services/context";
 import { useHistory } from "react-router-dom";
 
 const SingoutModal = ({ setShow, show }) => {
-  // const [{ signOut }] = useAuthProvider();
+  const [{ signOut }] = useAuthProvider();
   const { push } = useHistory();
   return (
     <React.Fragment>
@@ -29,13 +29,12 @@ const SingoutModal = ({ setShow, show }) => {
         <ModalFooter
           showApprove={true}
           approve={() => {
-            // signOut();
+            signOut();
             push("/login");
           }}
-          revoke={() => {}}
           showDeny={false}
           showRevoke={false}
-          negativeLabel={"Close Request"}
+          negativeLabel={"Close"}
           negativeAction={() => setShow(false)}
         />
       </BasicModal>

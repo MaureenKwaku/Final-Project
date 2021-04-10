@@ -4,8 +4,7 @@ import UserMenu from "../../components/user-menu";
 import NavLink from "../../components/navlink";
 import { PageLoader } from "../../components/loaders";
 import { routes } from "../../navigation";
-// import {ProtectedRoute as Route} from "../../navigation";
-import { Route } from "react-router-dom";
+import { ProtectedRoute as Route } from "../../navigation";
 import LogoutRequest from "./signout";
 
 const Layout = () => {

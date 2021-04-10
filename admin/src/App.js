@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Toaster } from "react-hot-toast";
-import AppNavigator from "./navigation";
+import AppNavigator from "./services/context";
 
 function App() {
   return (
