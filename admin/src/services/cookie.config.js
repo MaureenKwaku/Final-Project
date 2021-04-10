@@ -1,8 +1,7 @@
 import Cookies from "js-cookie";
 
 export const BASE_URL =
-  process.env.REACT_APP_SERVER_URL ||
-  "https://gmes-api.polymorphlabs.io/graphql";
+  process.env.REACT_APP_SERVER_URL || "http://localhost:5000/graphql";
 
 class Auth {
   getCipher() {
