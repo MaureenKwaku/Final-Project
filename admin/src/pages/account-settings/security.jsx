@@ -1,40 +1,40 @@
 // import { ApolloError, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import * as React from "react";
-// import { UPDATE_PASSWORD } from "../../services/graphql/mutation";
-// import _ from "lodash";
-// import { useAuthProvider } from "../../services/context";
-// import toast from "react-hot-toast";
-const loading = false;
+import { UPDATE_PASSWORD } from "../../services/graphql/mutations";
+import _ from "lodash";
+import toast from "react-hot-toast";
+
 const Security = () => {
   React.useEffect(() => {
     document.title = "Security Settings - Rent-A-Ride Dashboard";
   }, []);
-  // const [, data] = useAuthProvider();
   const [oldPassword, setOldPassword] = React.useState("");
   const [newPassword, setNewPassword] = React.useState("");
   const [confirmNew, setConfirmNew] = React.useState("");
 
-  // const [update, { loading }] = useMutation(UPDATE_PASSWORD);
+  const [update, { loading }] = useMutation(UPDATE_PASSWORD);
 
   const onSubmit = (event) => {
     event.preventDefault();
-    // if (newPassword.trim() !== confirmNew.trim()) {
-    //   return toast.error("Please make sure your new password is confirmed");
-    // }
-    // update({
-    //   variables: {
-    //     email: data?.userToken?.email as string,
-    //     oldPassword,
-    //     newPassword,
-    //   },
-    // })
-    //   .then(() => {
-    //     toast.success("You successfully updated your password");
-    //   })
-    //   .catch((e: ApolloError) => {
-    //     console.log(e);
-    //     toast.error(_.startCase(_.camelCase(e.graphQLErrors[0]?.message)));
-    //   });
+    if (newPassword.trim() !== confirmNew.trim()) {
+      return toast.error("Please make sure your new password is confirmed");
+    }
+    update({
+      variables: {
+        old: oldPassword,
+        password: newPassword,
+      },
+    })
+      .then(() => {
+        toast.success("You successfully updated your password");
+        setOldPassword("");
+        setNewPassword("");
+        setConfirmNew("");
+      })
+      .catch((e) => {
+        toast.error(_.startCase(_.camelCase(e.graphQLErrors[0]?.message)));
+      });
   };
   return (
     <>

@@ -1,11 +1,11 @@
 import * as React from "react";
-// import { useAuthProvider } from "../../services/context";
+import { useAuthProvider } from "../../services/context";
 
 const Profile = () => {
   React.useEffect(() => {
     document.title = "Profile - Rent-A-Ride Dashboard";
   }, []);
-  // const [, data] = useAuthProvider();
+  const [, data] = useAuthProvider();
   return (
     <>
       <section aria-labelledby="payment_details_heading" className={"mb-3"}>
@@ -28,7 +28,7 @@ const Profile = () => {
                         Full name
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        Admin Name here
+                        {data?.userToken?.admin?.name || "Admin Name"}
                       </dd>
                     </div>
 
@@ -37,7 +37,7 @@ const Profile = () => {
                         Email address
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {/* {data?.userToken?.email} */}domeybenjamin1@gmail.com
+                        {data?.userToken?.admin?.email || "Admin Email"}
                       </dd>
                     </div>
                     <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -45,7 +45,7 @@ const Profile = () => {
                         Phone Number
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {/* {data?.userToken?.email} */}+233545526664
+                        +{data?.userToken?.admin?.phone || "Admin Phone"}
                       </dd>
                     </div>
                   </dl>

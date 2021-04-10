@@ -25,7 +25,7 @@ const ClientApollo = ({ children }) => {
     let customHeaders = {};
     if (auth) {
       authorization = JSON.parse(auth).token;
-      customHeaders.token = authorization;
+      customHeaders.authorization = authorization;
     }
 
     operation.setContext({

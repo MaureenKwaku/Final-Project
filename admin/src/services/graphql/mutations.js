@@ -15,3 +15,9 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const UPDATE_PASSWORD = gql`
+  mutation($old: String!, $password: String!) {
+    updateAdminPassword(input: { oldPassword: $old, newPassword: $password })
+  }
+`;

@@ -5,15 +5,15 @@ export const BASE_URL =
 
 class Auth {
   getCipher() {
-    return Cookies.get("gmes-cipher") || null;
+    return Cookies.get("rent-a-ride-admin-cipher") || null;
   }
 
   setCipher(token) {
-    Cookies.set("gmes-cipher", token);
+    Cookies.set("rent-a-ride-admin-cipher", token);
   }
 
   clearCipher() {
-    Cookies.remove("gmes-cipher");
+    Cookies.remove("rent-a-ride-admin-cipher");
   }
 }
 
