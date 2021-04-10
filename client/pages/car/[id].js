@@ -102,13 +102,90 @@ const Car = () => {
                 fugit, vero numquam nam quos reiciendis cupiditate enim. Illo
                 perspiciatis pariatur dolorum totam.
               </p>
-
-              <a href="/book/1" class="btn">
-                Rent
-              </a>
             </div>
           </div>
         </div>
+
+        <section class="mainForBook">
+          <form class="small-container">
+            <h2 class="title text-3xl font-medium">Fill Form To Rent</h2>
+            <div className={"grid grid-cols-2 gap-6 mb-10"}>
+              <div>
+                <label htmlFor="email-address" className="">
+                  Pickup Location
+                </label>
+                <input
+                  type="text"
+                  required
+                  className="appearance-none mt-3 relative block w-full px-3 py-4 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-none focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+                  placeholder="Location here eg. Accra Mall"
+                />
+              </div>
+              <div>
+                <label htmlFor="email-address" className="">
+                  Return Location
+                </label>
+                <input
+                  type="text"
+                  required
+                  className="appearance-none mt-3 relative block w-full px-3 py-4 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-none focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+                  placeholder="Location here eg. Accra Mall"
+                />
+              </div>
+              <div>
+                <label htmlFor="email-address" className="">
+                  Pickup Date
+                </label>
+                <input
+                  type="date"
+                  required
+                  className="appearance-none mt-3 relative block w-full px-3 py-4 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-none focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+                  placeholder="Location here eg. Accra Mall"
+                />
+              </div>
+              <div>
+                <label htmlFor="email-address" className="">
+                  Return Date
+                </label>
+                <input
+                  type="date"
+                  required
+                  className="appearance-none mt-3 relative block w-full px-3 py-4 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-none focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+                  placeholder="Location here eg. Accra Mall"
+                />
+              </div>
+              <div>
+                <label htmlFor="email-address" className="">
+                  Pickup Time
+                </label>
+                <input
+                  type="time"
+                  required
+                  className="appearance-none mt-3 relative block w-full px-3 py-4 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-none focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+                  placeholder="Location here eg. Accra Mall"
+                />
+              </div>
+              <div>
+                <label htmlFor="email-address" className="">
+                  Return Time
+                </label>
+                <input
+                  type="time"
+                  required
+                  className="appearance-none mt-3 relative block w-full px-3 py-4 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-none focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+                  placeholder="Location here eg. Accra Mall"
+                />
+              </div>
+            </div>
+            <hr />
+
+            <div class="flex justify-center">
+              <button type="submit" className={"btn"}>
+                Rent Now
+              </button>
+            </div>
+          </form>
+        </section>
 
         <div className={"small-container "}>
           <div
