@@ -49,3 +49,48 @@ export const GET_CARS = gql`
     carsLength(filter: $filter)
   }
 `;
+
+export const GET_RENTALS = gql`
+  query Rentals($filter: GetRentalsFilter, $skip: Int, $limit: Int) {
+    rentals(filter: $filter, pagination: { skip: $skip, limit: $limit }) {
+      _id
+      car {
+        _id
+        make
+        model
+        plateNumber
+      }
+      createdBy {
+        _id
+        name
+        email
+        photo
+      }
+      pickup {
+        address
+        at
+      }
+      dropoff {
+        address
+        at
+      }
+      status
+      payment {
+        _id
+        code
+        status
+      }
+      cancellation {
+        reason
+        at
+      }
+      amount
+      paidAt
+      pickedUpAt
+      droppedOffAt
+      createdAt
+      updatedAt
+    }
+    rentalsLength(filter: $filter)
+  }
+`;

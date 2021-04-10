@@ -4,32 +4,21 @@ import { usePagination } from "../../components/hooks";
 import { DataLoader } from "../../components/loaders";
 import Dataview from "./dataview";
 import BreadCrumb from "../../components/breadcrumb";
+import { useQuery } from "@apollo/client";
+import { GET_RENTALS } from "../../services/graphql/queries";
 
-const data = {
-  admins: [
-    {
-      user: {
-        name: "Domey Benjamin",
-      },
-      car: {
-        plateNumber: "GHS2232232",
-      },
-      amount: "4535",
-      numberOfHours: 50,
-      createdAt: new Date(),
-    },
-  ],
-  adminsLength: 1,
-};
-const loading = false;
-const refetch = () => {};
-
-const Admins = () => {
+const Rentals = () => {
   React.useEffect(() => {
-    document.title = "List Of Adminisitrators - Rent-A-Ride Dashboard";
+    document.title = "List Of Rentals - Rent-A-Ride Dashboard";
   }, []);
 
   const { limit, setLimit, end, setEnd, skip, setSkip } = usePagination(12);
+  const { data, loading, refetch } = useQuery(GET_RENTALS, {
+    variables: {
+      skip,
+      limit,
+    },
+  });
 
   return (
     <React.Fragment>
@@ -44,13 +33,13 @@ const Admins = () => {
           <>
             {data ? (
               <>
-                {data?.adminsLength === 0 ? (
+                {data?.rentalsLength === 0 ? (
                   <>
                     <div className={"mt-10"}>
                       <EmptyAlert
-                        mainMessage={"No Admins"}
+                        mainMessage={"No Rentals "}
                         subMessage={
-                          "You will see the list of admins here when they are created"
+                          "You will see the list of requests here when they are made"
                         }
                       />
                     </div>
@@ -59,11 +48,11 @@ const Admins = () => {
                   <>
                     <div>
                       <Dataview
-                        data={data?.admins}
+                        data={data?.rentals}
                         refetch={refetch}
                         setLimit={setLimit}
                         limit={limit}
-                        total={data?.adminsLength}
+                        total={data?.rentalsLength}
                         skip={skip}
                         setSkip={setSkip}
                         end={end}
@@ -90,4 +79,4 @@ const Admins = () => {
   );
 };
 
-export default Admins;
+export default Rentals;
