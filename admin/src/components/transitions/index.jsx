@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useEffect, useContext } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import { CSSTransition as ReactCSSTransition } from "react-transition-group";
 
 const TransitionContext = React.createContext({
@@ -93,7 +93,7 @@ const Transition = ({ show, appear, ...rest }) => {
         parent: {
           show,
           isInitialRender,
-          appear, 
+          appear,
         },
       }}
     >
