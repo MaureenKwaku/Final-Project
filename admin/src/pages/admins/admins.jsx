@@ -4,20 +4,8 @@ import { usePagination } from "../../components/hooks";
 import { DataLoader } from "../../components/loaders";
 import Dataview from "./dataview";
 import BreadCrumb from "../../components/breadcrumb";
-
-const data = {
-  admins: [
-    {
-      name: "Domey Benjamin",
-      email: "domeybenjamin1@gmail.com",
-      phone: "+233545526664",
-      createdAt: new Date(),
-    },
-  ],
-  adminsLength: 1,
-};
-const loading = false;
-const refetch = () => {};
+import { useQuery } from "@apollo/client";
+import { GET_ADMINS } from "../../services/graphql/queries";
 
 const Admins = () => {
   React.useEffect(() => {
@@ -25,7 +13,12 @@ const Admins = () => {
   }, []);
 
   const { limit, setLimit, end, setEnd, skip, setSkip } = usePagination(12);
-
+  const { data, loading, refetch } = useQuery(GET_ADMINS, {
+    variables: {
+      skip,
+      limit,
+    },
+  });
   return (
     <React.Fragment>
       <div className={"mt-5"}>
