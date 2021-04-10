@@ -1,37 +1,41 @@
+import { useMutation } from "@apollo/client";
 import * as React from "react";
+import toast from "react-hot-toast";
+import { useHistory } from "react-router";
+import { useAuthProvider } from "../../services/context";
+import { LOGIN } from "../../services/graphql/mutations";
 
-const loading = false;
 const Login = () => {
+  const { push } = useHistory();
+  const [{ signOut, signIn }] = useAuthProvider();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   React.useEffect(() => {
     document.title = "Login - Rent A Ride Dashboard";
-    // signOut();
-  }, []);
+    signOut();
+  }, [signOut]);
 
-  //   const [login, { loading }] = useMutation<LoginOutputProps, LoginInputProps>(
-  //     LOGIN
-  //   );
+  const [login, { loading }] = useMutation(LOGIN);
 
   const HandleSubmit = (e) => {
-    //     e.preventDefault();
-    //     toast.remove();
-    //     login({
-    //       variables: {
-    //         email,
-    //         password,
-    //       },
-    //     })
-    //       .then(async ({ data }) => {
-    //         if (data) {
-    //           await signIn(data?.loginUser);
-    //           push("/");
-    //         }
-    //       })
-    //       .catch((e: ApolloError) => {
-    //         return toast.error("Your email and/or password is incorrect");
-    //       });
+    e.preventDefault();
+    toast.remove();
+    login({
+      variables: {
+        email,
+        password,
+      },
+    })
+      .then(async ({ data }) => {
+        if (data) {
+          await signIn(data?.loginAdmin);
+          push("/");
+        }
+      })
+      .catch((e) => {
+        return toast.error("Your email and/or password is incorrect");
+      });
   };
 
   return (
