@@ -1,5 +1,5 @@
 import React, { useRef, Fragment } from "react";
-import { Transition } from "@headlessui/react";
+import Transition from "../../transitions";
 import { useOutsideListener } from "../../hooks";
 
 const Modal = ({ show, setShow, size, children, canClose, height }) => {
@@ -13,7 +13,6 @@ const Modal = ({ show, setShow, size, children, canClose, height }) => {
       <Transition show={show}>
         <div className="fixed z-20 bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center">
           <Transition
-            show={show}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
             enterTo="opacity-100"

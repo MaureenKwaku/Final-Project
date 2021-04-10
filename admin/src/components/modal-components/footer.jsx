@@ -31,7 +31,7 @@ const FooterHeader = ({
             <button
               onClick={approve}
               type="submit"
-              className="-ml-px relative inline-flex items-center px-3 py-3 rounded-none  bg-primary-600 text-white text-sm font-medium hover:bg-primary-800 focus:z-10 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+              className="-ml-px relative inline-flex items-center px-3 py-3 rounded-none  bg-yellow-600 text-white text-sm font-medium hover:bg-yellow-800 focus:z-10 focus:outline-none focus:ring-1 focus:ring-yellow-500 focus:border-yellow-500"
             >
               <span className="sr-only">Next</span>
 
@@ -42,7 +42,7 @@ const FooterHeader = ({
             <button
               onClick={deny}
               type="submit"
-              className="ml-2 relative inline-flex items-center px-3 py-3 rounded-none border bg-white text-gray-500 hover:text-white text-sm font-medium hover:bg-primary-800 focus:z-10 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+              className="ml-2 relative inline-flex items-center px-3 py-3 rounded-none border bg-white text-gray-500 hover:text-white text-sm font-medium hover:bg-yellow-800 focus:z-10 focus:outline-none focus:ring-1 focus:ring-yellow-500 focus:border-yellow-500"
             >
               <span className="sr-only">Next</span>
 
@@ -53,7 +53,7 @@ const FooterHeader = ({
             <button
               onClick={revoke}
               type="submit"
-              className="-ml-px relative inline-flex items-center px-3 py-3 rounded-none  bg-primary-600 text-white text-sm font-medium hover:bg-primary-800 focus:z-10 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+              className="-ml-px relative inline-flex items-center px-3 py-3 rounded-none  bg-yellow-600 text-white text-sm font-medium hover:bg-yellow-800 focus:z-10 focus:outline-none focus:ring-1 focus:ring-yellow-500 focus:border-yellow-500"
             >
               <span className="sr-only">Next</span>
 

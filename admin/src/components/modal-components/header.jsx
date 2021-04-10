@@ -5,7 +5,7 @@ const ModalHeader = ({ close, label, icon: Icon }) => {
     <React.Fragment>
       <div
         className={
-          "h-16 bg-primary-600 w-full flex justify-between items-center px-3"
+          "h-16 bg-yellow-600 w-full flex justify-between items-center px-3"
         }
       >
         <div className={"flex flex-row "}>
@@ -25,7 +25,7 @@ const ModalHeader = ({ close, label, icon: Icon }) => {
             <div
               onClick={close}
               className={
-                "bg-primary-800 cursor-pointer hover:bg-primary-700 rounded-full flex justify-center items-center p-2"
+                "bg-yellow-800 cursor-pointer hover:bg-yellow-700 rounded-full flex justify-center items-center p-2"
               }
             >
               <span
