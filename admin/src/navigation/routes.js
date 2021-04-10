@@ -1,9 +1,10 @@
 import { lazy } from "react";
-import { OVERVIEW, ADMINS, USERS } from "./constants";
+import { OVERVIEW, ADMINS, USERS, CARS } from "./constants";
 
 const Overview = lazy(() => import("../pages/dashboard"));
 const Admins = lazy(() => import("../pages/admins"));
 const Users = lazy(() => import("../pages/users"));
+const Cars = lazy(() => import("../pages/cars"));
 
 const routes = [
   {
@@ -17,6 +18,12 @@ const routes = [
     exact: true,
     component: Users,
     path: USERS,
+  },
+  {
+    name: "Manage Cars",
+    exact: true,
+    component: Cars,
+    path: CARS,
   },
   {
     name: "Manage Admins",

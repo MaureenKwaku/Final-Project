@@ -6,23 +6,22 @@ import Dataview from "./dataview";
 import BreadCrumb from "../../components/breadcrumb";
 
 const data = {
-  users: [
+  cars: [
     {
       name: "Domey Benjamin",
-      address: "Hello world",
       email: "domeybenjamin1@gmail.com",
       phone: "+233545526664",
       createdAt: new Date(),
     },
   ],
-  usersLength: 1,
+  carsLength: 1,
 };
 const loading = false;
 const refetch = () => {};
 
-const Users = () => {
+const Cars = () => {
   React.useEffect(() => {
-    document.title = "List Of Users - Rent-A-Ride Dashboard";
+    document.title = "List Of Cars - Rent-A-Ride Dashboard";
   }, []);
 
   const { limit, setLimit, end, setEnd, skip, setSkip } = usePagination(12);
@@ -30,7 +29,7 @@ const Users = () => {
   return (
     <React.Fragment>
       <div className={"mt-5"}>
-        <BreadCrumb name={"Users"} />
+        <BreadCrumb name={"Cars"} />
       </div>
 
       <div className={"mt-3 border-none"}>
@@ -40,13 +39,13 @@ const Users = () => {
           <>
             {data ? (
               <>
-                {data?.usersLength === 0 ? (
+                {data?.carsLength === 0 ? (
                   <>
                     <div className={"mt-10"}>
                       <EmptyAlert
-                        mainMessage={"No Users"}
+                        mainMessage={"No Cars"}
                         subMessage={
-                          "You will see the list of users here when they register"
+                          "You will see the list of cars here when they get uploaded"
                         }
                       />
                     </div>
@@ -55,11 +54,11 @@ const Users = () => {
                   <>
                     <div>
                       <Dataview
-                        data={data?.users}
+                        data={data?.cars}
                         refetch={refetch}
                         setLimit={setLimit}
                         limit={limit}
-                        total={data?.usersLength}
+                        total={data?.carsLength}
                         skip={skip}
                         setSkip={setSkip}
                         end={end}
@@ -86,4 +85,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Cars;
