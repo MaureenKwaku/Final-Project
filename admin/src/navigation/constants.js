@@ -5,6 +5,7 @@ export const MAIN_LAYOUT = "/";
 
 //for main pages
 export const OVERVIEW = "/";
+export const USERS = "/users";
 export const ADMINS = "/admins";
 export const CARS = "/cars";
 export const RENTALS = "/rentals";
