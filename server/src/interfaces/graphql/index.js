@@ -10,6 +10,7 @@ exports.resolvers = {
   Query: {
     ...admin.resolver.Query,
     ...user.resolver.Query,
+    ...car.resolver.Query,
     ...rental.resolver.Query,
   },
 };

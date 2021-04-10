@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import cn from "classnames";
 // import { format } from "date-fns";
 
 const AdminCard = ({ data, view }) => {
@@ -6,21 +7,35 @@ const AdminCard = ({ data, view }) => {
     <Fragment>
       <li className="col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200">
         <div className="flex-1 flex flex-col p-8">
-          <img
-            className="w-32 h-32 flex-shrink-0 mx-auto bg-black rounded-md"
-            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=ah3lxr8uqw&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-            alt=""
-          />
-          <h3 className="mt-6 text-gray-900 text-sm font-medium">
-            Jane Cooper
+          <div className={"relative "}>
+            {data?.featured && (
+              <div
+                className={
+                  "absolute right-0 rounded text-xs bg-yellow-600 text-white px-3 py-1"
+                }
+              >
+                Featured
+              </div>
+            )}
+            <img
+              className="w-32 h-32 flex-shrink-0 mx-auto rounded-md"
+              src={data?.images?.[0]}
+              alt=""
+            />
+          </div>
+          <h3 className="mt-6 text-gray-900 truncate text-sm font-medium">
+            {data?.make} {data?.model} - {data?.plateNumber}
           </h3>
           <dl className="mt-1 flex-grow flex flex-col justify-between">
-            <dt className="sr-only">Title</dt>
-            {/* <dd className="text-gray-500 text-sm">Paradigm Representative</dd> */}
             <dt className="sr-only">Role</dt>
             <dd className="mt-1">
-              <span className="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full">
-                Available
+              <span
+                className={cn("px-2 py-1  text-xs font-medium  rounded-full", {
+                  "text-green-800 bg-green-100": data?.status === "Available",
+                  "text-yellow-800 bg-yellow-100": data?.status === "Rented",
+                })}
+              >
+                {data?.status}
               </span>
             </dd>
           </dl>

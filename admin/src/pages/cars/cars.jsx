@@ -4,20 +4,8 @@ import { usePagination } from "../../components/hooks";
 import { DataLoader } from "../../components/loaders";
 import Dataview from "./dataview";
 import BreadCrumb from "../../components/breadcrumb";
-
-const data = {
-  cars: [
-    {
-      name: "Domey Benjamin",
-      email: "domeybenjamin1@gmail.com",
-      phone: "+233545526664",
-      createdAt: new Date(),
-    },
-  ],
-  carsLength: 1,
-};
-const loading = false;
-const refetch = () => {};
+import { useQuery } from "@apollo/client";
+import { GET_CARS } from "../../services/graphql/queries";
 
 const Cars = () => {
   React.useEffect(() => {
@@ -25,6 +13,13 @@ const Cars = () => {
   }, []);
 
   const { limit, setLimit, end, setEnd, skip, setSkip } = usePagination(12);
+
+  const { data, loading, refetch } = useQuery(GET_CARS, {
+    variables: {
+      skip,
+      limit,
+    },
+  });
 
   return (
     <React.Fragment>
