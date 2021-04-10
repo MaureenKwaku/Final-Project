@@ -6,11 +6,13 @@ import Dataview from "./dataview";
 import BreadCrumb from "../../components/breadcrumb";
 import { useQuery } from "@apollo/client";
 import { GET_ADMINS } from "../../services/graphql/queries";
+import AddAdmin from "./add";
 
 const Admins = () => {
   React.useEffect(() => {
     document.title = "List Of Adminisitrators - Rent-A-Ride Dashboard";
   }, []);
+  const [add, setAdd] = React.useState(false);
 
   const { limit, setLimit, end, setEnd, skip, setSkip } = usePagination(12);
   const { data, loading, refetch } = useQuery(GET_ADMINS, {
@@ -73,6 +75,40 @@ const Admins = () => {
             )}
           </>
         )}
+      </div>
+      <div className={"absolute bottom-10 right-10"}>
+        <FAB
+          onClick={() => {
+            setAdd(true);
+          }}
+        />
+      </div>
+      <AddAdmin show={add} setShow={setAdd} refetch={refetch} />
+    </React.Fragment>
+  );
+};
+
+const FAB = ({ onClick }) => {
+  return (
+    <React.Fragment>
+      <div
+        onClick={onClick}
+        className={"bg-yellow-700 p-3 rounded-full border-none cursor-pointer"}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+          />
+        </svg>
       </div>
     </React.Fragment>
   );

@@ -27,13 +27,12 @@ const SingoutModal = ({ setShow, show }) => {
         </div>
 
         <ModalFooter
-          showApprove={true}
-          approve={() => {
+          showPositive
+          positiveAction={() => {
             signOut();
             push("/login");
           }}
-          showDeny={false}
-          showRevoke={false}
+          positiveLabel={"Yes, Logout!"}
           negativeLabel={"Close"}
           negativeAction={() => setShow(false)}
         />
