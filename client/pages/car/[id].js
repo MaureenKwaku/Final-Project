@@ -110,6 +110,75 @@ const Car = () => {
           </div>
         </div>
 
+        <div className={"small-container "}>
+          <div
+            className={
+              "w-full flex flex-row justify-between items-center my-10"
+            }
+          >
+            <div>
+              <h2 className={"text-2xl font-medium"}>Featured Vehicles</h2>
+            </div>
+            <div>
+              <a
+                href={"/cars"}
+                className={"text-gray-600 hover:text-yellow-600"}
+              >
+                View More
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="small-container">
+          <div class="row">
+            <div class="col-4">
+              <a href="/car/1">
+                <img src="/images/2019-mercedes-benz-sprinter.jpg" />
+                <h4> 2020 Toyota Corolla</h4>
+              </a>
+              <a href="/car/1" class="add-cart">
+                <button type="button" name="cart" class="btn">
+                  View Car
+                </button>
+              </a>
+            </div>
+            <div class="col-4">
+              <a href="/car/1">
+                <img src="/images/2019-mercedes-benz-sprinter.jpg" />
+                <h4> 2021 Mercedes G Wagon</h4>
+              </a>
+              <a href="/car/1" class="add-cart">
+                <button type="button" name="cart" class="btn">
+                  View Car
+                </button>
+              </a>
+            </div>
+            <div class="col-4">
+              <a href="/car/1">
+                <img src="/images/2019-mercedes-benz-sprinter.jpg" />
+                <h4> Nissan Minivan</h4>
+              </a>
+              <a href="/car/1" class="add-cart">
+                <button type="button" name="cart" class="btn">
+                  View Car
+                </button>
+              </a>
+            </div>
+            <div class="col-4">
+              <a href="/car/1">
+                <img src="/images/2019-mercedes-benz-sprinter.jpg" />
+                <h4> Hyndai Veloster</h4>
+              </a>
+              <a href="/car/1" class="add-cart">
+                <button type="button" name="cart" class="btn">
+                  View Car
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+
         <Footer />
       </Fragment>
     </Fragment>
