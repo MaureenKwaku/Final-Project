@@ -26,7 +26,7 @@ const Header = () => {
           </div>
           <div class="dropdown">
             <a href="/cars">Booking</a>
-            <a href="#" class="active">
+            <a href="/" class="active">
               Home
             </a>
             <a
