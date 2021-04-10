@@ -5,8 +5,9 @@ export const MAIN_LAYOUT = "/";
 
 //for main pages
 export const OVERVIEW = "/";
-export const REQUEST_AND_APPROVALS = "/approvals";
-export const USSD_STATISTICS = "/ussd-statistics";
+export const ADMINS = "/admins";
+export const CARS = "/cars";
+export const RENTALS = "/rentals";
 export const SETTINGS = "/settings";
 
 // for 404

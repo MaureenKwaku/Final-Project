@@ -17,6 +17,7 @@ const NavLink = ({ pathname }) => {
               "text-gray-300 hover:bg-gray-700 hover:text-white": !(
                 pathname === link.path
               ),
+              "ml-5": i > 0,
             }
           )}
         >
