@@ -7,9 +7,7 @@ const net = axios.create({
   headers: {
     'Content-Type': 'application/json',
     'Cache-Control': 'no-cache',
-    Authorization: `Bearer ${
-      process.env.PAYMENT_SECRET || 'sk_test_3b22642a60172f5e0245a70a87f771a904d14330'
-    }`,
+    Authorization: `Bearer ${process.env.PAYMENT_SECRET}`,
   },
 });
 

@@ -27,3 +27,4 @@ yarn-error.log*
 /src/tailwind.css
 
 .eslintcache
+.env
