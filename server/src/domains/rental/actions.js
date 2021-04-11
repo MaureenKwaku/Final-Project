@@ -169,6 +169,10 @@ async function pickupRental({ input: { rentalId } }) {
       status: 'PickedUp',
       pickedUpAt: new Date(),
     });
+
+    await CarModel.findByIdAndUpdate(__rental.car, {
+      status: 'Rented',
+    });
     return true;
   } catch (err) {
     throw err;
@@ -183,6 +187,10 @@ async function finishRentalProcess({ input: { rentalId } }) {
     await RentalModel.findByIdAndUpdate(rentalId, {
       status: 'DroppedOff',
       droppedOffAt: new Date(),
+    });
+
+    await CarModel.findByIdAndUpdate(__rental.car, {
+      status: 'Available',
     });
     return true;
   } catch (err) {
