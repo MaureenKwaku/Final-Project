@@ -6,8 +6,10 @@ import Header from "../../components/headerForProduct";
 import { GET_CAR, GET_CARS } from "../../lib/graphql/queries";
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
+import { useAuthContext } from "../_app";
 
 const Car = () => {
+  const [, userData] = useAuthContext();
   const { data: cars, loading: loadCars } = useQuery(GET_CARS, {
     variables: { limit: 4, filter: { featured: true } },
   });
@@ -16,8 +18,6 @@ const Car = () => {
   const { data, loading } = useQuery(GET_CAR, {
     variables: { id },
   });
-
-  console.log(data);
 
   return (
     <Fragment>
@@ -220,9 +220,19 @@ const Car = () => {
             <hr />
 
             <div class="flex justify-center">
-              <button type="submit" className={"btn"}>
-                Rent Now
-              </button>
+              {userData?.userToken ? (
+                <Fragment>
+                  <button type="submit" className={"btn"}>
+                    Rent Now
+                  </button>
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <span className={"my-5 text-blue-400"}>
+                    Please login before you make a request to rent this car
+                  </span>
+                </Fragment>
+              )}
             </div>
           </form>
         </section>
