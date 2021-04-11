@@ -1,5 +1,6 @@
 import * as React from "react";
 import cn from "classnames";
+import { ClassicSpinner } from "react-spinners-kit";
 
 const REQUESTED = "requested";
 const PAID = "paid";
@@ -8,7 +9,7 @@ const PICKEDUP = "pickedup";
 const DROPPEDOFF = "droppedoff";
 const CANCELLED = "cancelled";
 
-const PFZRequests = () => {
+const PFZRequests = ({ data, loading }) => {
   const [tab, setTab] = React.useState(REQUESTED);
   return (
     <React.Fragment>
@@ -20,7 +21,20 @@ const PFZRequests = () => {
         </div>
 
         <div className={"h-32 flex justify-center items-center w-full"}>
-          <span className={"font-bold text-3xl"}>100</span>
+          <span className={"font-bold text-3xl"}>
+            {loading && <ClassicSpinner size={15} color={"#000"} />}
+            {tab === REQUESTED
+              ? data?.statistics?.requestedRentals
+              : tab === PAID
+              ? data?.statistics?.paidRentals
+              : tab === ACCEPTED
+              ? data?.statistics?.acceptedRentals
+              : tab === PICKEDUP
+              ? data?.statistics?.pickedUpRentals
+              : tab === DROPPEDOFF
+              ? data?.statistics?.droppedOffRentals
+              : data?.statistics?.cancelledRentals}
+          </span>
         </div>
       </div>
     </React.Fragment>

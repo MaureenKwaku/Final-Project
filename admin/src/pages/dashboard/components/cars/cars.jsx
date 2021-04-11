@@ -1,12 +1,13 @@
 import * as React from "react";
 import cn from "classnames";
+import { ClassicSpinner } from "react-spinners-kit";
 
 const ALL = "all";
 const AVAILABLE = "available";
 const RENTED = "rented";
 
-const PFZRequests = () => {
-  const [tab, setTab] = React.useState(AVAILABLE);
+const PFZRequests = ({ data, loading }) => {
+  const [tab, setTab] = React.useState(ALL);
   return (
     <React.Fragment>
       <div className={"bg-white w-full p-4 h-full"}>
@@ -17,7 +18,14 @@ const PFZRequests = () => {
         </div>
 
         <div className={"h-32 flex justify-center items-center w-full"}>
-          <span className={"font-bold text-3xl"}>100</span>
+          <span className={"font-bold text-3xl"}>
+            {loading && <ClassicSpinner size={15} color={"#000"} />}
+            {tab === ALL
+              ? data?.statistics?.cars
+              : tab === AVAILABLE
+              ? data?.statistics?.availableCars
+              : data?.statistics?.rentedOutCars}
+          </span>
         </div>
       </div>
     </React.Fragment>

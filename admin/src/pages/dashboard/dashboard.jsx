@@ -3,8 +3,11 @@ import BreadCrumb from "../../components/breadcrumb";
 import Rentals from "./components/rentals";
 import Cars from "./components/cars";
 import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { GET_STATISTICS } from "../../services/graphql/queries";
 
 const Overview = () => {
+  const { data, loading } = useQuery(GET_STATISTICS);
   React.useEffect(() => {
     document.title = "Welcome - Rent-A-Ride Dashboard";
   }, []);
@@ -33,7 +36,11 @@ const Overview = () => {
                   >
                     Users
                   </Link>
-                  <p className="text-gray-500">16 Members</p>
+                  <p className="text-gray-500">
+                    {loading
+                      ? "loading..."
+                      : `${data?.statistics?.users} Member(s)`}
+                  </p>
                 </div>
               </div>
             </li>
@@ -50,7 +57,12 @@ const Overview = () => {
                   >
                     Administrators
                   </Link>
-                  <p className="text-gray-500">12 Members</p>
+                  <p className="text-gray-500">
+                    {" "}
+                    {loading
+                      ? "loading..."
+                      : `${data?.statistics?.administrators} Member(s)`}
+                  </p>
                 </div>
               </div>
             </li>
@@ -67,7 +79,12 @@ const Overview = () => {
                   >
                     Cars
                   </Link>
-                  <p className="text-gray-500">16 of them</p>
+                  <p className="text-gray-500">
+                    {" "}
+                    {loading
+                      ? "loading..."
+                      : `${data?.statistics?.cars} Of them`}
+                  </p>
                 </div>
               </div>
             </li>
@@ -84,7 +101,12 @@ const Overview = () => {
                   >
                     Rentals
                   </Link>
-                  <p className="text-gray-500">8 in all</p>
+                  <p className="text-gray-500">
+                    {" "}
+                    {loading
+                      ? "loading..."
+                      : `${data?.statistics?.rentals} in all`}
+                  </p>
                 </div>
               </div>
             </li>
@@ -97,10 +119,10 @@ const Overview = () => {
           </h2>
           <div className={"w-full grid grid-cols-6 gap-8 mt-5"}>
             <div className={"col-span-2"}>
-              <Cars />
+              <Cars data={data} loading={loading} />
             </div>
             <div className={"col-span-4"}>
-              <Rentals />
+              <Rentals data={data} loading={loading} />
             </div>
           </div>
         </div>

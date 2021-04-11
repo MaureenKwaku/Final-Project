@@ -1,5 +1,24 @@
 import { gql } from "@apollo/client";
 
+export const GET_STATISTICS = gql`
+  {
+    statistics {
+      users
+      administrators
+      cars
+      availableCars
+      rentedOutCars
+      rentals
+      requestedRentals
+      paidRentals
+      acceptedRentals
+      pickedUpRentals
+      droppedOffRentals
+      cancelledRentals
+    }
+  }
+`;
+
 export const GET_ADMINS = gql`
   query Admins($filter: GetAdminsFilter, $skip: Int, $limit: Int) {
     admins(filter: $filter, pagination: { skip: $skip, limit: $limit }) {
