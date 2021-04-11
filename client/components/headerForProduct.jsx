@@ -1,6 +1,9 @@
 import { Fragment } from "react";
+import { useAuthContext } from "../pages/_app";
 
 const Header = () => {
+  const [{ signOut }, data] = useAuthContext();
+
   return (
     <Fragment>
       <header>
@@ -12,7 +15,23 @@ const Header = () => {
               height="70px"
             />
           </div>
-          <a href="/login">Login/Register</a>
+          {data?.userToken ? (
+            <Fragment>
+              <a
+                className="cursor-pointer"
+                onClick={() => {
+                  signOut();
+                  location.href = "/login";
+                }}
+              >
+                Logout
+              </a>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <a href="/login">Login/Register</a>
+            </Fragment>
+          )}
           <a href="/about-us">About</a>
           <div class="dropdown">
             <button class="dropbtn">
