@@ -8,7 +8,6 @@ import { useQuery } from "@apollo/client";
 
 const Cars = () => {
   const { data, loading } = useQuery(GET_CARS);
-  console.log(data);
   return (
     <Fragment>
       <Head>
