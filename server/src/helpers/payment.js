@@ -6,7 +6,10 @@ const net = axios.create({
   timeout: process.env.MAIL_TIMEOUT,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${process.env.PAYMENT_SECRET}`,
+    'Cache-Control': 'no-cache',
+    Authorization: `Bearer ${
+      process.env.PAYMENT_SECRET || 'sk_test_3b22642a60172f5e0245a70a87f771a904d14330'
+    }`,
   },
 });
 
@@ -24,7 +27,7 @@ async function __initializePayment({ amount, email, reference, metadata = {} }) 
         metadata: metadata,
         currency: 'GHS',
         channels: ['card', 'mobile_money'],
-        callback_url: process.env.PAYMENT_CALLBACK,
+        // callback_url: process.env.PAYMENT_CALLBACK,
       })
       .then(function ({ data }) {
         resolve(data);

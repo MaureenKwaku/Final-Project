@@ -72,7 +72,7 @@ async function createRental({ input }, userId) {
 
     // get user
     const __user = await UserModel.findById(userId).select('_id email').lean();
-    let __cost = getComputedAmount(input, __car);
+    let __cost = parseInt(getComputedAmount(input, __car));
     let __newRental = new RentalModel({
       car: input.car,
       amount: __cost,
@@ -87,32 +87,40 @@ async function createRental({ input }, userId) {
       createdBy: userId,
     });
 
-    let __newPayment = new PaymentModel({
+    let __payment = new PaymentModel({
       code: await __generateCode(PaymentModel),
       amount: __cost,
       rental: __newRental.id,
       createdBy: userId,
     });
 
+    __newRental.payment = __payment.id;
+
     // initialize payment
-    const __paymentResponse = await __initializePayment({
-      amount: __payment.amount,
-      email: __user.email,
-      reference: __payment.code,
-    });
-    if (__paymentResponse.status === true && __paymentResponse.data) {
-      __payment.authorizationUrl = __paymentResponse.data.authorization_url;
-      __payment.accessCode = __paymentResponse.data.access_code;
-    } else {
-      throw new Error('AnErrorOccurred\nTryAgain');
+    try {
+      const __paymentResponse = await __initializePayment({
+        amount: __payment.amount,
+        email: __user.email,
+        reference: __payment.code,
+      });
+
+      if (__paymentResponse.status === true && __paymentResponse.data) {
+        __payment.authorizationUrl = __paymentResponse.data.authorization_url;
+        __payment.accessCode = __paymentResponse.data.access_code;
+      } else {
+        throw new Error('AnErrorOccurred\nTryAgain');
+      }
+    } catch (error) {
+      console.log(error);
     }
 
     try {
-      await Promise.all([__newRental.save(), __newPayment.save()]);
+      await Promise.all([__newRental.save(), __payment.save()]);
     } catch (error) {
+      console.log('save err', error);
       return error;
     }
-    return __newPayment;
+    return __payment;
   } catch (err) {
     return err;
   }

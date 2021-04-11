@@ -20,6 +20,7 @@ exports.startRest = function (app) {
 
   app.post('/v1/paystack/verify', async function (req, res) {
     try {
+      console.log('called');
       const ips = ['52.31.139.75', '52.49.173.169', '52.214.14.220'];
       if (!ips.includes(req.headers['x-forwarded-for'])) throw new Error('InvalidIp');
       const hash = crypto
@@ -35,7 +36,7 @@ exports.startRest = function (app) {
     } catch (err) {
       console.log(err);
     } finally {
-      res.send(200);
+      res.sendStatus(200);
     }
   });
   return app;

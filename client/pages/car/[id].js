@@ -45,18 +45,20 @@ const Car = () => {
     //compare them makinsg sure dropoff is after pickup
     if (isBefore(dropoff, pickup))
       return toaster.notify("Make sure dropoff date comes after pickup date");
-    return;
     invokeRental({
       variables: {
         carId: id,
         pickupAddress,
         dropoffAddress,
+        pickupTime: pickup,
+        dropoffTime: dropoff,
       },
     })
       .then(({ data }) => {
         location.href = data?.createRental?.authorizationUrl;
       })
       .catch((e) => {
+        console.log(e);
         toaster.warning(e?.graphQLErrors?.[0]?.message);
       });
   };
@@ -92,7 +94,7 @@ const Car = () => {
                     {data?.car?.make} {data?.car?.model}
                   </h3>
                   <h3 className={"font-medium"}>
-                    GH&cent; {data?.car?.price} per hour
+                    GH&cent; {(data?.car?.price / 100).toFixed(2)} per hour
                   </h3>
 
                   <h3 className={"flex flex-row mt-5"}>

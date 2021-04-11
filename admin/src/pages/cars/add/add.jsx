@@ -59,7 +59,7 @@ const ViewComponent = ({ show, setShow, refetch }) => {
               variables: {
                 featured: featured === "yes",
                 make,
-                price: parseFloat(price),
+                price: parseFloat(price) * 100,
                 model,
                 chassis: chassis || undefined,
                 vin: vin || undefined,

@@ -1,5 +1,6 @@
 const { PaymentModel } = require('./model');
 const { RentalModel } = require('../rental/model');
+const { __verifyPayment } = require('../../helpers/payment');
 
 //verify payment from paystack
 async function verifyPayment(input) {
