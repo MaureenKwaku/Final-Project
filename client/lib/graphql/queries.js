@@ -10,6 +10,7 @@ export const GET_CARS = gql`
       chassis
       vin
       description
+      price
       plateNumber
       images
       status
@@ -17,5 +18,25 @@ export const GET_CARS = gql`
       createdAt
     }
     carsLength(filter: $filter)
+  }
+`;
+
+export const GET_CAR = gql`
+  query Car($id: ID!) {
+    car(filter: { carId: $id }) {
+      _id
+      featured
+      make
+      price
+      model
+      chassis
+      vin
+      description
+      plateNumber
+      images
+      status
+      updatedAt
+      createdAt
+    }
   }
 `;
