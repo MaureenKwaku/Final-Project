@@ -2,8 +2,13 @@ import Head from "next/head";
 import { Fragment } from "react";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
+import { GET_CARS } from "../../lib/graphql/queries";
+import { withApollo } from "../../lib/apollo";
+import { useQuery } from "@apollo/client";
 
 const Cars = () => {
+  const { data, loading } = useQuery(GET_CARS);
+  console.log(data);
   return (
     <Fragment>
       <Head>
@@ -36,7 +41,7 @@ const Cars = () => {
             <div class="small-container">
               <h2 class="title text-4xl font-semibold">Available Vehicles</h2>
               <div class="row">
-                <div class="col-md-4 text-center">
+                {/* <div class="col-md-4 text-center">
                   <ul id="filter-list">
                     <li class="list active" data-filter="all">
                       ALL
@@ -54,69 +59,24 @@ const Cars = () => {
                       VAN
                     </li>
                   </ul>
-                </div>
+                </div> */}
 
                 <div class="product">
-                  <div class="itembox van">
-                    <a href="/car/1">
-                      <img src="/images/2019-mercedes-benz-sprinter.jpg" />
-                    </a>
-                  </div>
-                  <div class="itembox sedan">
-                    <a href="/car/1">
-                      <img src="/images/2019-mercedes-benz-sprinter.jpg" />{" "}
-                    </a>
-                  </div>
-                  <div class="itembox suv">
-                    <a href="/car/1">
-                      <img src="/images/2019-mercedes-benz-sprinter.jpg" />
-                    </a>
-                  </div>
-                  <div class="itembox van">
-                    <a href="/car/1">
-                      <img src="/images/2019-mercedes-benz-sprinter.jpg" />
-                    </a>
-                  </div>
-                  <div class="itembox sedan">
-                    <a href="/car/1">
-                      <img src="/images/2019-mercedes-benz-sprinter.jpg" />
-                    </a>
-                  </div>
-                  <div class="itembox suv">
-                    <a href="/car/1">
-                      <img src="/images/2019-mercedes-benz-sprinter.jpg" />
-                    </a>
-                  </div>
-                  <div class="itembox coupe">
-                    <a href="/car/1">
-                      <img src="/images/2019-mercedes-benz-sprinter.jpg" />
-                    </a>
-                  </div>
-                  <div class="itembox sedan">
-                    <a href="/car/1">
-                      <img src="/images/2019-mercedes-benz-sprinter.jpg" />
-                    </a>
-                  </div>
-                  <div class="itembox sedan">
-                    <a href="/car/1">
-                      <img src="/images/2019-mercedes-benz-sprinter.jpg" />
-                    </a>
-                  </div>
-                  <div class="itembox sedan">
-                    <a href="/car/1">
-                      <img src="/images/2019-mercedes-benz-sprinter.jpg" />
-                    </a>
-                  </div>
-                  <div class="itembox sedan">
-                    <a href="/car/1">
-                      <img src="/images/2019-mercedes-benz-sprinter.jpg" />
-                    </a>
-                  </div>
-                  <div class="itembox suv">
-                    <a href="/car/1">
-                      <img src="/images/2019-mercedes-benz-sprinter.jpg" />
-                    </a>
-                  </div>
+                  {loading ? (
+                    <Fragment>loading cars...</Fragment>
+                  ) : (
+                    <Fragment>
+                      {data?.cars?.map((car, i) => (
+                        <Fragment key={i}>
+                          <div class="itembox van">
+                            <a href={`/car/${car?._id}`}>
+                              <img src={car?.images?.[0]} />
+                            </a>
+                          </div>
+                        </Fragment>
+                      ))}
+                    </Fragment>
+                  )}
                 </div>
               </div>
             </div>
@@ -128,5 +88,4 @@ const Cars = () => {
     </Fragment>
   );
 };
-
-export default Cars;
+export default withApollo({ ssr: true })(Cars);

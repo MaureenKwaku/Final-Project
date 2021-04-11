@@ -1,9 +1,20 @@
+import { useQuery } from "@apollo/client";
 import Head from "next/head";
 import { Fragment } from "react";
 import Footer from "../components/footer";
 import Header from "../components/header";
+import { withApollo } from "../lib/apollo";
+import { GET_CARS } from "../lib/graphql/queries";
 
-export default function Home() {
+function Home() {
+  const { data, loading } = useQuery(GET_CARS, {
+    variables: {
+      limit: 9,
+      filter: { featured: true },
+    },
+  });
+
+  console.log(data);
   return (
     <Fragment>
       <Head>
@@ -36,79 +47,58 @@ export default function Home() {
         <div class="categories" id="category">
           <div class="small-container">
             <h2 class="title text-4xl font-bold">Featured Vehicles</h2>
-            <div class="row">
-              <div class="col-4">
-                <img src="/images/kia saloon.jpg" />
-                <h4 className={"mt-1 text-gray-600"}>
-                  {" "}
-                  2019 Mercedes Sprinter
-                </h4>
-              </div>
-              <div class="col-4">
-                <img src="/images/kia saloon.jpg" />
-                <h4> 2020 Toyota Corolla</h4>
-              </div>
-              <div class="col-4">
-                <img src="/images/kia saloon.jpg" />
-                <h4> 2021 Mercedes Benz G Wagon</h4>
-              </div>
-            </div>
+            {loading ? (
+              <Fragment>
+                <div className={"row"}>loading cars ....</div>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <div class="row">
+                  {data?.cars?.map((car, i) => (
+                    <Fragment key={i}>
+                      <div
+                        onClick={() => {
+                          location.href = `/car/${car?._id}`;
+                        }}
+                        class="col-4 cursor-pointer"
+                      >
+                        <img src={car?.images?.[0]} />
+                        <h4 className={"mt-1 text-gray-600"}>
+                          {car?.make} {car?.model}
+                        </h4>
+                      </div>
+                    </Fragment>
+                  ))}
+                </div>
 
-            <div class="row">
-              <div class="col-4">
-                <img src="/images/kia saloon.jpg" />
-                <h4> Kia Sorento</h4>
-              </div>
-              <div class="col-4">
-                <img src="./images/kia saloon.jpg" />
-                <h4> 2021 Mercedes</h4>
-              </div>
-              <div class="col-4">
-                <img src="/images/kia saloon.jpg" />
-                <h4> Mazda Saloon</h4>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-4">
-                <img src="/images/kia saloon.jpg" />
-                <h4> Nissan Minivan</h4>
-              </div>
-              <div class="col-4">
-                <img src="/images/kia saloon.jpg" />
-                <h4> Hyndai Veloster</h4>
-              </div>
-              <div class="col-4">
-                <img src="/images/kia saloon.jpg" />
-                <h4> Land Cruiser</h4>
-              </div>
-            </div>
-            <a
-              href={"/cars"}
-              className={
-                "flex flex-row items-center text-yellow-400 hover:text-yellow-800"
-              }
-            >
-              <span
-                className={
-                  " flex flex-row items-center text-yellow-400 hover:text-yellow-800"
-                }
-              >
-                All Products{" "}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 ml-2"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
+                <a
+                  href={"/cars"}
+                  className={
+                    "flex flex-row items-center text-yellow-400 hover:text-yellow-800"
+                  }
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </span>
-            </a>
+                  <span
+                    className={
+                      " flex flex-row items-center text-yellow-400 hover:text-yellow-800"
+                    }
+                  >
+                    All Products{" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 ml-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                </a>
+              </Fragment>
+            )}
           </div>
         </div>
 
@@ -353,3 +343,5 @@ export default function Home() {
     </Fragment>
   );
 }
+
+export default withApollo({ ssr: true })(Home);
