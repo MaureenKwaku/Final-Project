@@ -14,7 +14,7 @@ import { toaster } from "evergreen-ui";
 const Car = () => {
   const [, userData] = useAuthContext();
   const { data: cars, loading: loadCars } = useQuery(GET_CARS, {
-    variables: { limit: 4, filter: { featured: true } },
+    variables: { limit: 4, filter: { featured: true, status: "Available" } },
   });
   const router = useRouter();
   const { id } = router.query;

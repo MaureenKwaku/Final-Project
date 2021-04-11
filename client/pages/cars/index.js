@@ -7,7 +7,13 @@ import { withApollo } from "../../lib/apollo";
 import { useQuery } from "@apollo/client";
 
 const Cars = () => {
-  const { data, loading } = useQuery(GET_CARS);
+  const { data, loading } = useQuery(GET_CARS, {
+    variables: {
+      filter: {
+        status: "Available",
+      },
+    },
+  });
   return (
     <Fragment>
       <Head>

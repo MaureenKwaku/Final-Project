@@ -10,7 +10,7 @@ function Home() {
   const { data, loading } = useQuery(GET_CARS, {
     variables: {
       limit: 9,
-      filter: { featured: true },
+      filter: { featured: true, status: "Available" },
     },
   });
 
