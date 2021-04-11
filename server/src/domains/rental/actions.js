@@ -78,9 +78,11 @@ async function createRental({ input }, userId) {
       amount: __cost,
       pickup: {
         at: input.pickupTime,
+        address: input.pickupAddress,
       },
       dropoff: {
         at: input.dropoffTime,
+        address: input.dropoffAddress,
       },
       createdBy: userId,
     });
@@ -134,20 +136,10 @@ async function cancelRental({ input: { rentalId, reason } }) {
 }
 
 // approveRental a rental based on an id
-async function approveRental({ input: { rentalId, pickupAddress, dropoffAddress } }, adminId) {
+async function approveRental({ input: { rentalId } }, adminId) {
   try {
-    let __rental = await RentalModel.findById(rentalId);
-
     await RentalModel.findByIdAndUpdate(rentalId, {
       status: 'Accepted',
-      pickup: {
-        address: pickupAddress,
-        at: __rental.pickup.at,
-      },
-      dropoff: {
-        address: dropoffAddress,
-        at: __rental.dropoff.at,
-      },
       accepted: {
         by: adminId,
         at: new Date(),

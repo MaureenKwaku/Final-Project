@@ -59,6 +59,8 @@ module.exports = gql`
   input CreateRentalInput {
     car: ID!
     pickupTime: Date!
+    pickupAddress: String!
+    dropoffAddress: String!
     dropoffTime: Date!
   }
 
@@ -69,8 +71,6 @@ module.exports = gql`
 
   input ApproveRentalInput {
     rentalId: ID!
-    pickupAddress: String!
-    dropoffAddress: String!
   }
 
   input PickupRentalInput {
@@ -96,7 +96,7 @@ module.exports = gql`
   }
 
   extend type Mutation {
-    createRental(input: CreateRentalInput!): Rental!
+    createRental(input: CreateRentalInput!): Payment!
     cancelRental(input: CancelRentalInput!): Boolean!
     approveRental(input: ApproveRentalInput!): Boolean!
     pickupRental(input: PickupRentalInput!): Boolean!
