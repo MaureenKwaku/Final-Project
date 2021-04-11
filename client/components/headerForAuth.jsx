@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <Fragment>
       <header>
-        <div class="topnavProduct" id="myTopnav">
+        <div class="topnav" id="myTopnav">
           <div class="logo">
             <img
               src="/images/Hand_Holding_Key-512.webp"
@@ -26,7 +26,7 @@ const Header = () => {
           </div>
           <div class="dropdown">
             <a href="/cars">Booking</a>
-            <a href="/" class="">
+            <a href="/" class="active">
               Home
             </a>
             <a

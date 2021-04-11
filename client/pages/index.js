@@ -15,10 +15,10 @@ export default function Home() {
 
         <section class="main">
           <h1 className={"text-5xl font-bold"}>Rent-A-Ride Rental Service</h1>
-          <h3 className={"text-3xl mt-2"}>
+          <h3 className={"text-3xl mt-2 mb-10"}>
             Find the best luxury and low cost vehicular rentals here
           </h3>
-          <p className={"font-light text-lg mt-5"}>
+          <p className={"font-light text-lg mt-10"}>
             We offer several types and brandes of car for rents.
           </p>
 

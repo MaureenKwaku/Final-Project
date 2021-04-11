@@ -3,6 +3,7 @@ import "../styles/index.css";
 import "../styles/about-us.css";
 import "../styles/booking.css";
 import "../styles/product.css";
+// import "../styles/login.css";
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;
