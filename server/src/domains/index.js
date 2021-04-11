@@ -3,6 +3,7 @@ const user = require('./user');
 const car = require('./car');
 const rental = require('./rental');
 const payment = require('./payment');
+const dashboard = require('./dashboard');
 
 const domains = {
   admin,
@@ -10,6 +11,7 @@ const domains = {
   car,
   rental,
   payment,
+  dashboard,
 };
 
 module.exports = domains;
