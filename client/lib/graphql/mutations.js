@@ -51,3 +51,27 @@ export const CREATE_USER = gql`
     }
   }
 `;
+
+export const CREATE_RENTAL = gql`
+  mutation(
+    $carId: ID!
+    $pickupTime: Date!
+    $pickupAddress: String!
+    $dropoffAddress: String!
+    $dropoffTime: Date!
+  ) {
+    createRental(
+      input: {
+        car: $carId
+        pickupTime: $pickupTime
+        pickupAddress: $pickupAddress
+        dropoffTime: $dropoffTime
+        dropoffAddress: $dropoffAddress
+      }
+    ) {
+      _id
+      authorizationUrl
+      amount
+    }
+  }
+`;

@@ -1,12 +1,15 @@
 import Head from "next/head";
-import { Fragment, useEffect } from "react";
+import { Fragment, useState } from "react";
 import Footer from "../../components/footer";
 import { withApollo } from "../../lib/apollo";
 import Header from "../../components/headerForProduct";
 import { GET_CAR, GET_CARS } from "../../lib/graphql/queries";
-import { useQuery } from "@apollo/client";
+import { CREATE_RENTAL } from "../../lib/graphql/mutations";
+import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useAuthContext } from "../_app";
+import { isPast, isBefore } from "date-fns";
+import { toaster } from "evergreen-ui";
 
 const Car = () => {
   const [, userData] = useAuthContext();
@@ -18,6 +21,45 @@ const Car = () => {
   const { data, loading } = useQuery(GET_CAR, {
     variables: { id },
   });
+
+  //variables for creating rental
+  const [pickupAddress, setPickupAddress] = useState("");
+  const [dropoffAddress, setdropoffAddress] = useState("");
+  const [pickupDate, setPickupDate] = useState("");
+  const [pickupTime, setPickupTime] = useState("");
+  const [dropoffDate, setDropoffDate] = useState("");
+  const [dropoffTime, setDropoffTime] = useState("");
+
+  const [invokeRental, { loading: loadCreateRental }] = useMutation(
+    CREATE_RENTAL
+  );
+
+  const HandleSubmit = (e) => {
+    e.preventDefault();
+    let pickup = new Date(`${pickupDate}T${pickupTime}`);
+    let dropoff = new Date(`${dropoffDate}T${dropoffTime}`);
+    //check to see if they are past
+    if (isPast(pickup)) return toaster.notify("Pickup Date is past");
+    if (isPast(dropoff)) return toaster.notify("Return Date is past");
+
+    //compare them makinsg sure dropoff is after pickup
+    if (isBefore(dropoff, pickup))
+      return toaster.notify("Make sure dropoff date comes after pickup date");
+    return;
+    invokeRental({
+      variables: {
+        carId: id,
+        pickupAddress,
+        dropoffAddress,
+      },
+    })
+      .then(({ data }) => {
+        location.href = data?.createRental?.authorizationUrl;
+      })
+      .catch((e) => {
+        toaster.warning(e?.graphQLErrors?.[0]?.message);
+      });
+  };
 
   return (
     <Fragment>
@@ -147,7 +189,7 @@ const Car = () => {
         </div>
 
         <section class="mainForBook">
-          <form class="small-container">
+          <form onSubmit={HandleSubmit} class="small-container">
             <h2 class="title text-3xl font-medium">Fill Form To Rent</h2>
             <div className={"grid grid-cols-2 gap-6 mb-10"}>
               <div>
@@ -157,6 +199,8 @@ const Car = () => {
                 <input
                   type="text"
                   required
+                  value={pickupAddress}
+                  onChange={(e) => setPickupAddress(e?.target?.value)}
                   className="appearance-none mt-3 relative block w-full px-3 py-4 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-none focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                   placeholder="Location here eg. Accra Mall"
                 />
@@ -167,6 +211,8 @@ const Car = () => {
                 </label>
                 <input
                   type="text"
+                  value={dropoffAddress}
+                  onChange={(e) => setdropoffAddress(e?.target?.value)}
                   required
                   className="appearance-none mt-3 relative block w-full px-3 py-4 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-none focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                   placeholder="Location here eg. Accra Mall"
@@ -179,8 +225,9 @@ const Car = () => {
                 <input
                   type="date"
                   required
+                  value={pickupDate}
+                  onChange={(e) => setPickupDate(e?.target?.value)}
                   className="appearance-none mt-3 relative block w-full px-3 py-4 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-none focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                  placeholder="Location here eg. Accra Mall"
                 />
               </div>
               <div>
@@ -190,8 +237,9 @@ const Car = () => {
                 <input
                   type="date"
                   required
+                  value={dropoffDate}
+                  onChange={(e) => setDropoffDate(e?.target?.value)}
                   className="appearance-none mt-3 relative block w-full px-3 py-4 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-none focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                  placeholder="Location here eg. Accra Mall"
                 />
               </div>
               <div>
@@ -201,8 +249,9 @@ const Car = () => {
                 <input
                   type="time"
                   required
+                  value={pickupTime}
+                  onChange={(e) => setPickupTime(e?.target?.value)}
                   className="appearance-none mt-3 relative block w-full px-3 py-4 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-none focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                  placeholder="Location here eg. Accra Mall"
                 />
               </div>
               <div>
@@ -212,8 +261,9 @@ const Car = () => {
                 <input
                   type="time"
                   required
+                  value={dropoffTime}
+                  onChange={(e) => setDropoffTime(e?.target?.value)}
                   className="appearance-none mt-3 relative block w-full px-3 py-4 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-none focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                  placeholder="Location here eg. Accra Mall"
                 />
               </div>
             </div>
@@ -222,8 +272,12 @@ const Car = () => {
             <div class="flex justify-center">
               {userData?.userToken ? (
                 <Fragment>
-                  <button type="submit" className={"btn"}>
-                    Rent Now
+                  <button
+                    disabled={loadCreateRental}
+                    type="submit"
+                    className={"btn"}
+                  >
+                    {loadCreateRental ? "Loading..." : "Rent Now"}
                   </button>
                 </Fragment>
               ) : (
