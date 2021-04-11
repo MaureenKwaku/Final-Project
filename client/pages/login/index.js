@@ -1,9 +1,36 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import Head from "next/head";
 import Footer from "../../components/footer";
 import Header from "../../components/headerForProduct";
+import { withApollo } from "../../lib/apollo";
+import { useMutation } from "@apollo/client";
+import { LOGIN } from "../../lib/graphql/mutations";
+import { useAuthContext } from "../_app";
+import { toaster } from "evergreen-ui";
 
 const Login = () => {
+  const [{ signIn }] = useAuthContext();
+  const [invokeLogin, { loading }] = useMutation(LOGIN);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const HandleSubmit = (e) => {
+    e.preventDefault();
+
+    invokeLogin({
+      variables: {
+        email,
+        password,
+      },
+    })
+      .then(async ({ data }) => {
+        await signIn(data?.loginUser);
+        location.href = "/";
+      })
+      .catch((e) => {
+        toaster.warning(e?.graphQLErrors[0]?.message);
+      });
+  };
   return (
     <Fragment>
       <Head>
@@ -25,16 +52,29 @@ const Login = () => {
                   />
                 </div>
                 <div class="formBox">
-                  <form action="">
+                  <form onSubmit={HandleSubmit}>
                     <h2> Log In </h2>
-                    <input type="email" placeholder="Enter E-mail" id="email" />
+                    <input
+                      value={email}
+                      required
+                      onChange={(e) => setEmail(e?.target?.value)}
+                      type="email"
+                      placeholder="Enter E-mail"
+                      id="email"
+                    />
                     <input
                       type="password"
+                      value={password}
+                      required
+                      onChange={(e) => setPassword(e?.target?.value)}
                       placeholder="Password"
                       id="password"
-                      required
                     />
-                    <input type="submit" class="submit" value="Login" />
+                    <input
+                      type="submit"
+                      class="submit"
+                      value={loading ? "Loading..." : "Login"}
+                    />
                     <p class="register">
                       {" "}
                       <b>don't have an account ?</b>
@@ -58,4 +98,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default withApollo({ ssr: true })(Login);
