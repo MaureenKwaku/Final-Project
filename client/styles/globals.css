@@ -17,11 +17,20 @@
 .sectionLogin .mainLogin {
   position: relative;
   width: 800px;
-  height: 500px;
+  height: 550px;
   background: white;
   box-shadow: 0 10px 30px rgb(56, 54, 54);
   overflow: hidden;
 }
+
+/* .sectionLogin .mainLogin .register {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  background: white;
+  box-shadow: 0 10px 30px rgb(56, 54, 54);
+  overflow: hidden;
+} */
 
 .sectionLogin .mainLogin .user {
   position: absolute;
