@@ -26,27 +26,49 @@ const ViewComponent = ({ show, setShow, data }) => {
                 <div className="border-t border-gray-200">
                   <dl>
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
-                        Full name
-                      </dt>
+                      <dt className="text-sm font-medium text-gray-500">Car</dt>
                       <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {data?.name}
+                        {data?.car?.make} {data?.car?.model}
                       </dd>
                     </div>
                     <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                       <dt className="text-sm font-medium text-gray-500">
-                        Email address
+                        Pickup Address
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {data?.email}
+                        {data?.pickup?.address}
+                      </dd>
+                    </div>
+                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Pickup At
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {data && format(new Date(data?.pickup?.at), "PPp")}
+                      </dd>
+                    </div>
+                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Dropoff Address
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {data?.dropoff?.address}
+                      </dd>
+                    </div>
+                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Dropoff At
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {data && format(new Date(data?.dropoff?.at), "PPp")}
                       </dd>
                     </div>
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                       <dt className="text-sm font-medium text-gray-500">
-                        Phone Number
+                        Amount
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {data?.phone}
+                        GHS {(data?.amount / 100).toFixed(2)}
                       </dd>
                     </div>
                     <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -59,10 +81,73 @@ const ViewComponent = ({ show, setShow, data }) => {
                             "inline-flex items-center bg-green-100 text-green-800 px-2.5 py-0.5 rounded-full text-xs font-medium"
                           }
                         >
-                          Active
+                          {data?.status}
                         </span>
                       </dd>
                     </div>
+                    {data?.status === "Paid" && (
+                      <React.Fragment>
+                        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt className="text-sm font-medium text-gray-500">
+                            Paid At
+                          </dt>
+                          <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            {data && format(new Date(data?.paidAt), "PPp")}
+                          </dd>
+                        </div>
+                      </React.Fragment>
+                    )}
+                    {data?.status === "Accepted" && (
+                      <React.Fragment>
+                        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt className="text-sm font-medium text-gray-500">
+                            Accepted At
+                          </dt>
+                          <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            {data &&
+                              format(new Date(data?.accepted?.at), "PPp")}
+                          </dd>
+                        </div>
+                      </React.Fragment>
+                    )}
+                    {data?.status === "PickedUp" && (
+                      <React.Fragment>
+                        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt className="text-sm font-medium text-gray-500">
+                            PickedUp At
+                          </dt>
+                          <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            {data && format(new Date(data?.pickedUpAt), "PPp")}
+                          </dd>
+                        </div>
+                      </React.Fragment>
+                    )}
+                    {data?.status === "DroppedOff" && (
+                      <React.Fragment>
+                        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt className="text-sm font-medium text-gray-500">
+                            DroppedOff At
+                          </dt>
+                          <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            {data &&
+                              format(new Date(data?.droppedOffAt), "PPp")}
+                          </dd>
+                        </div>
+                      </React.Fragment>
+                    )}
+                    {data?.status === "Cancelled" && (
+                      <React.Fragment>
+                        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt className="text-sm font-medium text-gray-500">
+                            Cancelled At
+                          </dt>
+                          <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            {data &&
+                              format(new Date(data?.cancellation?.at), "PPp")}
+                          </dd>
+                        </div>
+                      </React.Fragment>
+                    )}
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                       <dt className="text-sm font-medium text-gray-500">
                         Created At

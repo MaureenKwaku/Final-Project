@@ -1,8 +1,7 @@
 import Cookies from "js-cookie";
 
-export const BASE_URL =
-  process.env.REACT_APP_SERVER_URL || "http://localhost:5000/graphql";
-
+export const BASE_URL = "http://localhost:5000/graphql";
+// process.env.REACT_APP_SERVER_URL ||
 class Auth {
   getCipher() {
     return Cookies.get("rent-a-ride-admin-cipher") || null;

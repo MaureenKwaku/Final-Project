@@ -31,6 +31,7 @@ const schema = new mongoose.Schema(
     paidAt: { type: Date },
     pickedUpAt: { type: Date },
     droppedOffAt: { type: Date },
+    isDeleted: { type: Boolean, default: false, required: true },
   },
   {
     timestamps: true,

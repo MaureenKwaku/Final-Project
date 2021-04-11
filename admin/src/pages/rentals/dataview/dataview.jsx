@@ -66,6 +66,7 @@ const DataView = ({
                 <React.Fragment key={i}>
                   <ApprovalCard
                     data={a}
+                    refetch={refetch}
                     view={() => {
                       setSelected(a);
                       setShowView(true);

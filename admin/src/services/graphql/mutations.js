@@ -59,3 +59,27 @@ export const ADD_CAR = gql`
     }
   }
 `;
+
+export const CANCEL_RENTAL = gql`
+  mutation($id: ID!) {
+    cancelRental(input: { rentalId: $id, reason: "Not Known" })
+  }
+`;
+
+export const APPROVE_RENTAL = gql`
+  mutation($id: ID!) {
+    approveRental(input: { rentalId: $id })
+  }
+`;
+
+export const PICKUP_RENTAL = gql`
+  mutation($id: ID!) {
+    pickupRental(input: { rentalId: $id })
+  }
+`;
+
+export const DROP_OFF_RENTAL = gql`
+  mutation($id: ID!) {
+    finishRentalProcess(input: { rentalId: $id })
+  }
+`;

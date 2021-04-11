@@ -26,7 +26,7 @@ module.exports = gql`
 
   type WhenType {
     address: String
-    at: String
+    at: Date
   }
 
   enum RentalStatus {

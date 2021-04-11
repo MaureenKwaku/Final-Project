@@ -37,6 +37,7 @@ export const GET_CARS = gql`
       featured
       make
       model
+      price
       chassis
       vin
       description
@@ -59,6 +60,9 @@ export const GET_RENTALS = gql`
         make
         model
         plateNumber
+      }
+      accepted {
+        at
       }
       createdBy {
         _id
