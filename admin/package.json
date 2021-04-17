@@ -37,7 +37,8 @@
     "start": "npm run tailwindConfig && react-scripts start",
     "build": "npm run tailwindConfig && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && firebase deploy --token 1//03-8f_1KjETC6CgYIARAAGAMSNwF-L9IrgL8tu-KnGU-4GHM37hDrIJ3YxGuf2R6RNTV24zaMEc4ZPrKFJ56mZ03L0zQAon9jOVk"
   },
   "eslintConfig": {
     "extends": [
