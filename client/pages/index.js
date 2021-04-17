@@ -1,16 +1,24 @@
 import { useQuery } from "@apollo/client";
 import Head from "next/head";
 import { Fragment } from "react";
+import FeedBack from "../components/feedback";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import { withApollo } from "../lib/apollo";
-import { GET_CARS } from "../lib/graphql/queries";
+import { GET_CARS, GET_FEEDBACKS } from "../lib/graphql/queries";
 
 function Home() {
   const { data, loading } = useQuery(GET_CARS, {
     variables: {
       limit: 9,
       filter: { featured: true, status: "Available" },
+    },
+  });
+
+  const { data: feedbacks, refetch } = useQuery(GET_FEEDBACKS, {
+    variables: {
+      limit: 3,
+      skip: 0,
     },
   });
 
@@ -237,114 +245,40 @@ function Home() {
             <h2 class="title text-4xl font-bold">Leave Your Feedback</h2>
 
             <div class="comment-box">
-              <form action="#">
-                <input
-                  type="text"
-                  name="full-name"
-                  placeholder="Enter Full Name"
-                />
-                <input type="text" name="email" placeholder="E-mail Address" />
-                <textarea
-                  name="comments"
-                  className={"border border-gray-600"}
-                  placeholder="Type Your Comment"
-                ></textarea>
-                <button
-                  type="submit"
-                  class="btn"
-                  style={{ background: "rgb(233, 174, 64)" }}
-                >
-                  Submit Comment
-                </button>
-              </form>
+              <FeedBack refetch={refetch} />
             </div>
-
-            <div class="row">
-              <div class="col-7">
-                <i class="fa fa-quote-left"></i>
-                <p>
-                  {" "}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Repudiandae, deserunt molestiae eligendi assumenda excepturi,
-                  accusantium modi a quos ad, quo iste. Dolores veritatis
-                  provident unde necessitatibus sint dolore fugit neque.
-                </p>
-                <div className={"w-full flex flex-col items-center"}>
-                  <div class="rating flex flex-row items-center">
-                    {[1, 2, 3, 4, 5].map(() => (
-                      <Fragment>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      </Fragment>
-                    ))}
-                  </div>
-                  <img src="/images/user-1.png" />
-                  <h3> Alex Parker</h3>
+            {feedbacks && feedbacks?.feedBacks?.length > 0 && (
+              <Fragment>
+                <div class="row">
+                  {feedbacks?.feedBacks?.map((feedback, i) => (
+                    <Fragment key={i}>
+                      <div class="col-7">
+                        <i class="fa fa-quote-left"></i>
+                        <p>{feedback?.message || "Not Specified"}</p>
+                        <div className={"w-full flex flex-col items-center"}>
+                          <div class="rating flex flex-row items-center">
+                            {[1, 2, 3, 4, 5].map(() => (
+                              <Fragment>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-5 w-5"
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                >
+                                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                              </Fragment>
+                            ))}
+                          </div>
+                          <img src="/images/user-2.png" />
+                          <h3>{feedback?.name || "Not Specified"}</h3>
+                        </div>
+                      </div>
+                    </Fragment>
+                  ))}
                 </div>
-              </div>
-              <div class="col-7">
-                <i class="fa fa-quote-left"></i>
-                <p>
-                  {" "}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Repudiandae, deserunt molestiae eligendi assumenda excepturi,
-                  accusantium modi a quos ad, quo iste. Dolores veritatis
-                  provident unde necessitatibus sint dolore fugit neque.
-                </p>
-                <div className={"w-full flex flex-col items-center"}>
-                  <div class="rating flex flex-row items-center">
-                    {[1, 2, 3, 4, 5].map(() => (
-                      <Fragment>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      </Fragment>
-                    ))}
-                  </div>
-                  <img src="/images/user-2.png" />
-                  <h3> Carlos Rodriguez</h3>
-                </div>
-              </div>
-              <div class="col-7">
-                <i class="fa fa-quote-left"></i>
-                <p>
-                  {" "}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Repudiandae, deserunt molestiae eligendi assumenda excepturi,
-                  accusantium modi a quos ad, quo iste. Dolores veritatis
-                  provident unde necessitatibus sint dolore fugit neque.
-                </p>
-                <div className={"w-full flex flex-col items-center"}>
-                  <div class="rating flex flex-row items-center">
-                    {[1, 2, 3, 4, 5].map(() => (
-                      <Fragment>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      </Fragment>
-                    ))}
-                  </div>
-                  <img src="/images/user-3.png" />
-                  <h3> Asta Flores</h3>
-                </div>
-              </div>
-            </div>
+              </Fragment>
+            )}
           </div>
         </div>
 

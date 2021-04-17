@@ -40,3 +40,16 @@ export const GET_CAR = gql`
     }
   }
 `;
+
+export const GET_FEEDBACKS = gql`
+  query GetFeedBacks($filter: GetFeedBacksFilter, $skip: Int, $limit: Int) {
+    feedBacks(filter: $filter, pagination: { skip: $skip, limit: $limit }) {
+      _id
+      name
+      email
+      message
+      createdAt
+      updatedAt
+    }
+  }
+`;

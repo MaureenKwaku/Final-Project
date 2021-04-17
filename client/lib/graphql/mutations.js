@@ -75,3 +75,11 @@ export const CREATE_RENTAL = gql`
     }
   }
 `;
+
+export const CREATE_FEEDBACK = gql`
+  mutation CreateFeedback($name: String!, $email: String, $message: String!) {
+    createFeedBack(input: { name: $name, email: $email, message: $message }) {
+      _id
+    }
+  }
+`;
