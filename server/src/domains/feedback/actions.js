@@ -11,7 +11,7 @@ async function getFeedBacks({
       model: FeedBackModel,
       search,
       dateRange,
-      filter: { ...filter, isDeleted: false },
+      filter: { ...filter },
       order,
       orderBy,
       searchFields: ['name', 'email', 'message'],
