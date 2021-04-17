@@ -1,4 +1,4 @@
-const { admin, user, car, rental, payment, dashboard } = require('../../domains');
+const { admin, user, car, rental, payment, dashboard, feedback } = require('../../domains');
 
 exports.resolvers = {
   Mutation: {
@@ -6,6 +6,7 @@ exports.resolvers = {
     ...user.resolver.Mutation,
     ...car.resolver.Mutation,
     ...rental.resolver.Mutation,
+    ...feedback.resolver.Mutation,
   },
   Query: {
     ...admin.resolver.Query,
@@ -13,6 +14,7 @@ exports.resolvers = {
     ...car.resolver.Query,
     ...rental.resolver.Query,
     ...dashboard.resolver.Query,
+    ...feedback.resolver.Query,
   },
 };
 
@@ -23,4 +25,5 @@ exports.typeDefs = [
   rental.schema,
   payment.schema,
   dashboard.schema,
+  feedback.schema,
 ];
