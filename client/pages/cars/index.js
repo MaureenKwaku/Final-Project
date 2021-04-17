@@ -71,15 +71,27 @@ const Cars = () => {
                     <Fragment>loading cars...</Fragment>
                   ) : (
                     <Fragment>
-                      {data?.cars?.map((car, i) => (
-                        <Fragment key={i}>
-                          <div class="itembox van">
-                            <a href={`/car/${car?._id}`}>
-                              <img src={car?.images?.[0]} />
-                            </a>
-                          </div>
+                      {data ? (
+                        <Fragment>
+                          {data?.carsLength === 0 ? (
+                            <Fragment>No Cars Available now ....</Fragment>
+                          ) : (
+                            <Fragment>
+                              {data?.cars?.map((car, i) => (
+                                <Fragment key={i}>
+                                  <div class="itembox van">
+                                    <a href={`/car/${car?._id}`}>
+                                      <img src={car?.images?.[0]} />
+                                    </a>
+                                  </div>
+                                </Fragment>
+                              ))}
+                            </Fragment>
+                          )}
                         </Fragment>
-                      ))}
+                      ) : (
+                        <Fragment>Oops, could not fetch cars ...</Fragment>
+                      )}
                     </Fragment>
                   )}
                 </div>

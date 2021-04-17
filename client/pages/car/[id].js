@@ -13,7 +13,7 @@ import { toaster } from "evergreen-ui";
 
 const Car = () => {
   const [, userData] = useAuthContext();
-  const { data: cars, loading: loadCars } = useQuery(GET_CARS, {
+  const { data: cars } = useQuery(GET_CARS, {
     variables: { limit: 4, filter: { featured: true, status: "Available" } },
   });
   const router = useRouter();
@@ -293,53 +293,53 @@ const Car = () => {
           </form>
         </section>
 
-        <div className={"small-container "}>
-          <div
-            className={
-              "w-full flex flex-row justify-between items-center my-10"
-            }
-          >
-            <div>
-              <h2 className={"text-2xl font-medium"}>Featured Vehicles</h2>
-            </div>
-            <div>
-              <a
-                href={"/cars"}
-                className={"text-gray-600 hover:text-yellow-600"}
+        {cars && cars?.carsLength > 0 && (
+          <Fragment>
+            <div className={"small-container "}>
+              <div
+                className={
+                  "w-full flex flex-row justify-between items-center my-10"
+                }
               >
-                View More
-              </a>
+                <div>
+                  <h2 className={"text-2xl font-medium"}>Featured Vehicles</h2>
+                </div>
+                <div>
+                  <a
+                    href={"/cars"}
+                    className={"text-gray-600 hover:text-yellow-600"}
+                  >
+                    View More
+                  </a>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div class="small-container">
-          <div class="row">
-            {loadCars ? (
-              <Fragment>loading cars ...</Fragment>
-            ) : (
-              <Fragment>
-                {cars?.cars?.map((car, i) => (
-                  <Fragment key={i}>
-                    <div class="col-4">
-                      <a href={`/car/${car?._id}`}>
-                        <img src={car?.images?.[0]} />
-                        <h4>
-                          {car?.make} {car?.model}
-                        </h4>
-                      </a>
-                      <a href={`/car/${car?._id}`} class="add-cart">
-                        <button type="button" name="cart" class="btn">
-                          View Car
-                        </button>
-                      </a>
-                    </div>
-                  </Fragment>
-                ))}
-              </Fragment>
-            )}
-          </div>
-        </div>
+            <div class="small-container">
+              <div class="row">
+                <Fragment>
+                  {cars?.cars?.map((car, i) => (
+                    <Fragment key={i}>
+                      <div class="col-4">
+                        <a href={`/car/${car?._id}`}>
+                          <img src={car?.images?.[0]} />
+                          <h4>
+                            {car?.make} {car?.model}
+                          </h4>
+                        </a>
+                        <a href={`/car/${car?._id}`} class="add-cart">
+                          <button type="button" name="cart" class="btn">
+                            View Car
+                          </button>
+                        </a>
+                      </div>
+                    </Fragment>
+                  ))}
+                </Fragment>
+              </div>
+            </div>
+          </Fragment>
+        )}
 
         <Footer />
       </Fragment>
