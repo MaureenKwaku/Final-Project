@@ -1,14 +1,23 @@
 import { useMutation } from "@apollo/client";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { CREATE_FEEDBACK } from "../lib/graphql/mutations";
 import { toaster } from "evergreen-ui";
+import { useAuthContext } from "../pages/_app";
 
 const FeedBack = ({ refetch }) => {
+  const [, userData] = useAuthContext();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
   const [invokerCreation, { loading }] = useMutation(CREATE_FEEDBACK);
+
+  useEffect(() => {
+    if (userData) {
+      setName(userData?.userToken?.user?.name);
+      setEmail(userData?.userToken?.user?.email);
+    }
+  }, [userData]);
 
   const HandleSubmit = (e) => {
     e.preventDefault();
