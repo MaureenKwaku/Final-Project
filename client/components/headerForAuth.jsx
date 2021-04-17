@@ -6,11 +6,13 @@ const Header = () => {
       <header>
         <div class="topnav" id="myTopnav">
           <div class="logo">
-            <img
-              src="/images/Hand_Holding_Key-512.webp"
-              width="90px"
-              height="70px"
-            />
+            <a href="/">
+              <img
+                src="/images/Hand_Holding_Key-512.webp"
+                width="90px"
+                height="70px"
+              />
+            </a>
           </div>
           <a href="/login">Login/Register</a>
           <a href="/about-us">About</a>
