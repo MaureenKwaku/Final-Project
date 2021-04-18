@@ -459,6 +459,7 @@ footer a {
   transition: all 0.5s ease;
   display: block;
   padding-bottom: 2px;
+  margin-left: -35px;
 }
 
 .footer-col ul li a:hover {
