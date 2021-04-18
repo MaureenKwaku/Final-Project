@@ -14,7 +14,7 @@ const Layout = () => {
   return (
     <React.Fragment>
       <div
-        style={{ height: "100vh" }}
+        // style={{ height: "100vh" }}
         className={"overflow-auto w-screen bg-gray-100"}
       >
         <header className="bg-gray-800 sticky top-0">

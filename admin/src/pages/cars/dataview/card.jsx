@@ -24,7 +24,7 @@ const AdminCard = ({ data, view }) => {
             />
           </div>
           <h3 className="mt-6 text-gray-900 truncate text-sm font-medium">
-            {data?.make} {data?.model} - {data?.plateNumber}
+            {data?.model} - {data?.plateNumber}
           </h3>
           <dl className="mt-1 flex-grow flex flex-col justify-between">
             <dt className="sr-only">Role</dt>
