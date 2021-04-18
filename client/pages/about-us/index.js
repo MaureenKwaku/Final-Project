@@ -41,7 +41,7 @@ const AboutUs = () => {
 
         <div class="small-container team">
           <div className={"mt-10"}>
-            <h2 class="title team-title text-5xl"> Our Team</h2>
+            <h2 class="title team-title text-4xl font-semibold"> Our Team</h2>
           </div>
           <div class="row">
             <div class="col-4">
