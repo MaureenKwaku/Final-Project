@@ -456,6 +456,8 @@ footer a {
   .team-title {
     text-align: center;
     padding-left: 5px;
+    margin-top: 50px;
+    font-size: 15px;
   }
 
   .team-title::after {
