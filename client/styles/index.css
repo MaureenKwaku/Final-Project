@@ -41,6 +41,10 @@ body {
   overflow: hidden;
 }
 
+button{
+  color: white;
+}
+
 .dropdown .dropbtn {
   font-size: 17px;
   border: none;
