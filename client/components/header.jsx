@@ -35,7 +35,7 @@ const Header = () => {
           )}
           <a href="/about-us">About</a>
           <div class="dropdown">
-            <button class="dropbtn">
+            <button class="mt-4 text-white">
               Contact Us
               <i class="fa fa-caret-down"></i>
             </button>
