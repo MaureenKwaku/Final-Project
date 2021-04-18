@@ -70,9 +70,9 @@ function Home() {
                       </Fragment>
                     ) : (
                       <Fragment>
-                        {data?.cars?.map((car, i) => (
-                          <Fragment key={i}>
-                            <div class="row">
+                        <div class="row">
+                          {data?.cars?.map((car, i) => (
+                            <Fragment key={i}>
                               <div
                                 onClick={() => {
                                   location.href = `/car/${car?._id}`;
@@ -84,9 +84,9 @@ function Home() {
                                   {car?.make} {car?.model}
                                 </h4>
                               </div>
-                            </div>
-                          </Fragment>
-                        ))}
+                            </Fragment>
+                          ))}
+                        </div>
                       </Fragment>
                     )}
 
