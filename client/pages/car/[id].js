@@ -323,9 +323,7 @@ const Car = () => {
                       <div class="col-4">
                         <a href={`/car/${car?._id}`}>
                           <img src={car?.images?.[0]} />
-                          <h4>
-                            {car?.make} {car?.model}
-                          </h4>
+                          <h4>{car?.model}</h4>
                         </a>
                         <a href={`/car/${car?._id}`} class="add-cart">
                           <button type="button" name="cart" class="btn">

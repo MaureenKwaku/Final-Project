@@ -81,7 +81,7 @@ function Home() {
                               >
                                 <img src={car?.images?.[0]} />
                                 <h4 className={"mt-1 text-gray-600"}>
-                                  {car?.make} {car?.model}
+                                  {car?.model}
                                 </h4>
                               </div>
                             </Fragment>
