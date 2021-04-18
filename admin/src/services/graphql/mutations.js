@@ -60,6 +60,38 @@ export const ADD_CAR = gql`
   }
 `;
 
+export const UPDATE_CAR = gql`
+  mutation UpdateCar(
+    $id: ID!
+    $featured: Boolean!
+    $make: String!
+    $model: String!
+    $chassis: String
+    $vin: String
+    $description: String
+    $plateNumber: String!
+    $images: [String]
+    $price: Float!
+  ) {
+    updateCar(
+      input: {
+        carId: $id
+        featured: $featured
+        make: $make
+        model: $model
+        chassis: $chassis
+        vin: $vin
+        price: $price
+        description: $description
+        images: $images
+        plateNumber: $plateNumber
+      }
+    ) {
+      _id
+    }
+  }
+`;
+
 export const CANCEL_RENTAL = gql`
   mutation($id: ID!) {
     cancelRental(input: { rentalId: $id, reason: "Not Known" })

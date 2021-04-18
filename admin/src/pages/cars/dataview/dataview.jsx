@@ -2,6 +2,7 @@ import * as React from "react";
 import ApprovalCard from "./card";
 import TopTableComponent from "./top";
 import ViewComponent from "../view";
+import EditComponent from "../edit";
 
 const DataView = ({
   limit,
@@ -16,6 +17,7 @@ const DataView = ({
 }) => {
   const [selected, setSelected] = React.useState(null);
   const [showView, setShowView] = React.useState(false);
+  const [showEdit, setShowEdit] = React.useState(false);
   const [page, setPage] = React.useState([1]);
   React.useEffect(() => {
     let p = [];
@@ -44,6 +46,10 @@ const DataView = ({
                 view={() => {
                   setSelected(a);
                   setShowView(true);
+                }}
+                edit={() => {
+                  setSelected(a);
+                  setShowEdit(true);
                 }}
               />
             </React.Fragment>
@@ -145,6 +151,12 @@ const DataView = ({
       <ViewComponent
         show={showView}
         setShow={setShowView}
+        data={selected}
+        refetch={refetch}
+      />
+      <EditComponent
+        show={showEdit}
+        setShow={setShowEdit}
         data={selected}
         refetch={refetch}
       />
