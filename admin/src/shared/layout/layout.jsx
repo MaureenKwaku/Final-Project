@@ -15,9 +15,9 @@ const Layout = () => {
     <React.Fragment>
       <div
         // style={{ height: "100vh" }}
-        className={"overflow-auto w-screen bg-gray-100"}
+        className={" h-screen w-screen "}
       >
-        <header className="bg-gray-800 sticky top-0">
+        <header className="bg-gray-800 z-10 sticky top-0">
           <div className="max-w-7xl mx-auto px-2 py-2 sm:px-4 lg:divide-y lg:divide-gray-700 lg:px-8">
             <div className="relative h-20 flex justify-between">
               <div className="relative z-10 px-2 flex lg:px-0">
@@ -130,7 +130,7 @@ const Layout = () => {
             </nav>
           </div>
         </header>
-        <div className={"overflow-auto"}>
+        <div className={""}>
           <main className=" max-w-7xl mx-auto px-2 py-2 sm:px-4 lg:divide-y lg:divide-yellow-600 lg:px-8">
             <React.Suspense fallback={PageLoader()}>
               {routes.map((route, i) => (

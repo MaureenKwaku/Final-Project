@@ -25,8 +25,18 @@ const Cars = () => {
 
   return (
     <React.Fragment>
-      <div className={"mt-5"}>
-        <BreadCrumb name={"Cars"} />
+      <div className={"mt-5 flex justify-between items-center"}>
+        <div>
+          {" "}
+          <BreadCrumb name={"Cars"} />
+        </div>
+        <div>
+          <FAB
+            onClick={() => {
+              setAdd(true);
+            }}
+          />
+        </div>
       </div>
 
       <div className={"mt-3 border-none"}>
@@ -78,13 +88,13 @@ const Cars = () => {
           </>
         )}
       </div>
-      <div className={"absolute bottom-10 right-10 border-none"}>
+      {/* <div className={"absolute bottom-10 right-10 border-none"}>
         <FAB
           onClick={() => {
             setAdd(true);
           }}
         />
-      </div>
+      </div> */}
       <AddCar show={add} setShow={setAdd} refetch={refetch} />
     </React.Fragment>
   );
@@ -95,22 +105,28 @@ const FAB = ({ onClick }) => {
     <React.Fragment>
       <div
         onClick={onClick}
-        className={"bg-yellow-700 p-3 rounded-full border-none cursor-pointer"}
+        className={
+          "bg-yellow-500 flex flex-row items-center px-3 py-2 rounded-md border-none cursor-pointer"
+        }
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 text-white"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-          />
-        </svg>
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+            />
+          </svg>
+        </div>
+
+        <div className={"text-white"}>Add</div>
       </div>
     </React.Fragment>
   );
