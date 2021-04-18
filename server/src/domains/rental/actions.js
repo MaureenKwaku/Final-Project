@@ -6,6 +6,11 @@ const { modelManager } = require('../../helpers');
 const moment = require('moment');
 const { __initializePayment } = require('../../helpers/payment');
 const { __generateCode } = require('../../helpers/code');
+const { WFClient } = require('witty-flow-sms');
+const _ = require('lodash');
+
+// Create An Instance Of The Class You Imported And Pass The App ID And App Secret
+const wittySmsClient = new WFClient(process.env.SMS_APP_ID, process.env.SMS_APP_SECRET);
 
 //get all rentals based on a filter
 async function getRentals({
@@ -84,11 +89,12 @@ async function createRental({ input }, userId) {
         at: input.dropoffTime,
         address: input.dropoffAddress,
       },
+      code: await __generateCode(RentalModel, 'RENT'),
       createdBy: userId,
     });
 
     let __payment = new PaymentModel({
-      code: await __generateCode(PaymentModel),
+      code: await __generateCode(PaymentModel, 'PMTS'),
       amount: __cost,
       rental: __newRental.id,
       createdBy: userId,
@@ -143,6 +149,8 @@ async function cancelRental({ input: { rentalId, reason } }) {
   }
 }
 
+const manipulatePhone = (phone) => _.chain(phone).slice(-9).join('').padStart(10, '0').value();
+
 // approveRental a rental based on an id
 async function approveRental({ input: { rentalId } }, adminId) {
   try {
@@ -153,6 +161,19 @@ async function approveRental({ input: { rentalId } }, adminId) {
         at: new Date(),
       },
     });
+    const __rental = await RentalModel.findById(rentalId).select('_id createdBy code').lean();
+    let __user = await UserModel.findById(__rental.createdBy).select('_id phone').lean();
+
+    //send sms of new password
+    try {
+      wittySmsClient.sendSms(
+        process.env.SMS_SENDERNAME,
+        manipulatePhone(__user.phone),
+        `Your rental code is ${__rental.code}. Please use this as your proof when you get to the location to pickup your ride. \nThank you for using rent-a ride service`,
+      );
+    } catch (error) {
+      throw error;
+    }
 
     return true;
   } catch (err) {

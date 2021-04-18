@@ -20,13 +20,13 @@ function __incrementCode(_code) {
   return String.fromCharCode(...__code);
 }
 
-async function __generateCode(_model, _filter = {}) {
+async function __generateCode(_model, type, _filter = {}) {
   return new Promise(async function (resolve, reject) {
     await _model
       .findOne({ ..._filter })
       .sort({ code: -1 })
       .then(function (_doc) {
-        let _code = _doc ? __incrementCode(_doc.code) : 'PMTS-0000000000001';
+        let _code = _doc ? __incrementCode(_doc.code) : `${type}-000000001`;
         resolve(_code);
       })
       .catch(reject);

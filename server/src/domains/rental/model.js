@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const schema = new mongoose.Schema(
   {
     car: { type: mongoose.SchemaTypes.ObjectId, ref: 'car' },
+    code: {
+      type: String,
+    },
     amount: { type: Number },
     createdBy: { type: mongoose.SchemaTypes.ObjectId, ref: 'user' },
     accepted: {
