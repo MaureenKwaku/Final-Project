@@ -98,7 +98,10 @@ const ViewComponent = ({ show, setShow, refetch }) => {
             close={() => setShow(false)}
           />
           <form onSubmit={HandleSubmit}>
-            <div className="bg-white shadow overflow-hidden sm:rounded-lg overflow-auto">
+            <div
+              style={{ height: "60vh" }}
+              className="bg-white shadow sm:rounded-lg overflow-auto"
+            >
               <div className="border-t border-gray-200">
                 <dl>
                   <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-5 sm:px-6">
