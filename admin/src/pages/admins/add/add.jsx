@@ -18,7 +18,7 @@ const ViewComponent = ({ show, setShow, refetch }) => {
       variables: {
         name: name.trim(),
         email: email.trim(),
-        phone: `233${phone.trim().slice(-9)}`,
+        phone: phone.trim(),
       },
     })
       .then(() => {
