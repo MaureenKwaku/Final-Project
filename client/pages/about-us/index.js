@@ -20,7 +20,7 @@ const AboutUs = () => {
               <div class="row">
                 <div class="flex justify-center">
                   <p className={"text-gray-900 w-1/2"}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Temporibus impedit molestiae reiciendis enim quaerat ad,
                     pariatur adipisci reprehenderit eum facere necessitatibus
                     ut, laboriosam est ullam doloremque vero, quidem minima cum!
@@ -40,7 +40,9 @@ const AboutUs = () => {
         </section>
 
         <div class="small-container team">
-          <h2 class="title team-title text-5xl"> Our Team</h2>
+          <div className={"mt-10"}>
+            <h2 class="title team-title text-5xl"> Our Team</h2>
+          </div>
           <div class="row">
             <div class="col-4">
               <img src="/images/team1.jpg" />
