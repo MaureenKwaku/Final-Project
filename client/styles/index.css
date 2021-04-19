@@ -50,6 +50,7 @@ body {
   background-color: inherit;
   margin: 0;
   cursor: pointer;
+  padding-bottom: 5px;
 }
 
 .dropdown-content {
@@ -61,7 +62,6 @@ body {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  margin-top: 10px;
 }
 
 .dropdown-content a {
