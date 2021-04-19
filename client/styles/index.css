@@ -46,11 +46,10 @@ body {
   border: none;
   outline: none;
   color: white;
-  padding: 14px 16px;
+  padding: 14px 16px 10px;
   background-color: inherit;
   margin: 0;
   cursor: pointer;
-  padding-bottom: 10px;
 }
 
 .dropdown-content {
