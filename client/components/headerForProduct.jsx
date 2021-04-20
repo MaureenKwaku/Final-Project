@@ -31,7 +31,7 @@ const Header = () => {
             </Fragment>
           ) : (
             <Fragment>
-              <a href="/login">Login/Register</a>
+              <a href="/login">Login|Register</a>
             </Fragment>
           )}
           <a href="/about-us">About</a>
@@ -46,7 +46,7 @@ const Header = () => {
             </div>
           </div>
           <div class="dropdown">
-            <a href="/cars">Booking</a>
+            <a href="/cars" class="active">Booking</a>
             <a href="/" class="">
               Home
             </a>
