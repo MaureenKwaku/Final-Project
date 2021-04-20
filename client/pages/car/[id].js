@@ -209,7 +209,7 @@ const Car = () => {
           )}{" "}
         </div>
 
-        <section class="mainForBook" style="margin-top: 80px;">
+        <section class="mainForBook">
           <form onSubmit={HandleSubmit} class="small-container">
             <h2 class="title text-3xl font-medium">Fill Form To Rent</h2>
             <div className={"grid grid-cols-2 gap-6 mb-10"}>
