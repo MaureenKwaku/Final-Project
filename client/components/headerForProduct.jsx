@@ -31,7 +31,7 @@ const Header = () => {
             </Fragment>
           ) : (
             <Fragment>
-              <a href="/login">Login|Register</a>
+              <a href="/login">Login | Register</a>
             </Fragment>
           )}
           <a href="/about-us">About</a>
