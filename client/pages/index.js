@@ -139,6 +139,7 @@ function Home() {
                 <p> Exclusively Available at Rent-A-Ride Rentals</p>
                 <h1 className={"font-bold"}>Discount of 30%</h1>
                 <small>
+                  {" "}
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Tempora id quis ad doloremque ipsa veniam, eius sunt molestiae
                   quam autem tempore ex ut recusandae nam corrupti distinctio
