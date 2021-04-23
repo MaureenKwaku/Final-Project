@@ -272,7 +272,7 @@ footer .row {
 
 footer ul {
   list-style-type: none;
-  margin-left: -35px;
+  /* margin-left: -35px; */
 }
 
 footer a {
@@ -423,8 +423,7 @@ footer a {
     font-size: 14px;
   }
 
-  .
-  {
+  . {
     text-align: center;
     padding-left: 200px;
   }
