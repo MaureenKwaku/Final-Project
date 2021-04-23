@@ -1,6 +1,8 @@
 import { Fragment } from "react";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const { pathname } = useRouter();
   return (
     <Fragment>
       <header>
@@ -14,7 +16,12 @@ const Header = () => {
               />
             </a>
           </div>
-          <a href="/login">Login/Register</a>
+          <a
+            href="/login"
+            className={`${pathname === "/login" ? "text-white" : "text-black"}`}
+          >
+            Login/Register
+          </a>
           <a href="/about-us">About</a>
           <div class="dropdown">
             <button class="dropbtn">
@@ -28,9 +35,7 @@ const Header = () => {
           </div>
           <div class="dropdown">
             <a href="/cars">Booking</a>
-            <a href="/" class="active">
-              Home
-            </a>
+            <a href="/">Home</a>
             <a
               href="javascript:void(0);"
               style={{ fontSize: "15px" }}

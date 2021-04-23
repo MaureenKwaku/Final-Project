@@ -1,8 +1,10 @@
 import { Fragment } from "react";
 import { useAuthContext } from "../pages/_app";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const [{ signOut }, data] = useAuthContext();
+  const { pathname } = useRouter();
 
   return (
     <Fragment>
@@ -31,10 +33,22 @@ const Header = () => {
             </Fragment>
           ) : (
             <Fragment>
-              <a href="/login">Login | Register</a>
+              <a
+                href="/login"
+                className={`${
+                  pathname === "/login" ? "text-white" : "text-black"
+                }`}
+              >
+                Login | Register
+              </a>
             </Fragment>
           )}
-          <a href="/about-us">About</a>
+          <a
+            href="/about-us"
+            className={`${pathname === "/about-us" ? "active" : ""}`}
+          >
+            About
+          </a>
           <div class="dropdown">
             <button class="dropbtn">
               Contact Us
@@ -46,8 +60,13 @@ const Header = () => {
             </div>
           </div>
           <div class="dropdown">
-            <a href="/cars" class="active">Booking</a>
-            <a href="/" class="">
+            <a
+              href="/cars"
+              className={`${pathname.includes("/car") ? "active" : ""}`}
+            >
+              Booking
+            </a>
+            <a href="/" className={`${pathname === "/" ? "active" : ""}`}>
               Home
             </a>
             <a
