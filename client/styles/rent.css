@@ -175,7 +175,7 @@ label {
 
 .title {
   text-align: center;
-  margin-top: 80px;
+  margin: 0 auto 50px;
   position: relative;
   line-height: 60px;
   color: gray;
